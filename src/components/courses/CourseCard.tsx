@@ -70,29 +70,36 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, isEnrolled = fal
 
         <div className="flex items-center gap-2 pt-3 border-t border-slate-100">
           {isEnrolled ? (
-            <Button variant="secondary" disabled size="sm" fullWidth leftIcon={<Check size={14} className="text-emerald-600 font-bold" />}>
-              Enrolled
-            </Button>
-          ) : (
             <Button
               variant="default"
               size="sm"
               fullWidth
-              onClick={handleBuyNow}
-              leftIcon={<ShoppingCart size={13} />}
+              onClick={() => setIsPreviewOpen(true)}
+              leftIcon={<Play size={13} />}
             >
-              Enroll Now
+              Watch Masterclass
             </Button>
+          ) : (
+            <>
+              <Button
+                variant="default"
+                size="sm"
+                fullWidth
+                onClick={handleBuyNow}
+                leftIcon={<ShoppingCart size={13} />}
+              >
+                Enroll Now
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => setIsPreviewOpen(true)}
+                leftIcon={<Play size={12} className="text-sky-600" />}
+              >
+                Curriculum
+              </Button>
+            </>
           )}
-
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => setIsPreviewOpen(true)}
-            leftIcon={<Play size={12} className="text-sky-600" />}
-          >
-            Preview
-          </Button>
         </div>
       </div>
 

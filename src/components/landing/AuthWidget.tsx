@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { UserRole } from "@/types";
 import { Button } from "@/components/ui/Button";
-import { Mail, Lock, User as UserIcon, CheckCircle2, AlertCircle, ArrowRight, Hammer, Store, Anchor } from "lucide-react";
+import { Mail, Lock, User as UserIcon, CheckCircle2, AlertCircle, ArrowRight, Hammer, Store, Anchor, Zap } from "lucide-react";
 
 interface AuthWidgetProps {
   initialMode?: "login" | "signup";
@@ -20,7 +20,7 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
   const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { login, signup, setActiveRole } = useAuth();
+  const { login, signup, quickLogin } = useAuth();
   const router = useRouter();
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
@@ -32,14 +32,14 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
       if (mode === "signup") {
         setMessage({ text: "Creating your account...", isError: false });
         const profile = await signup(name, email, password, role);
-        setMessage({ text: "Account ready! Redirecting...", isError: false });
+        setMessage({ text: "Account authenticated! Redirecting...", isError: false });
         if (profile.role === "seller") {
           router.push("/seller-dashboard");
         } else {
           router.push("/builder-dashboard");
         }
       } else {
-        setMessage({ text: "Verifying credentials...", isError: false });
+        setMessage({ text: "Authenticating session...", isError: false });
         const profile = await login(email, password);
         setMessage({ text: "Access granted! Redirecting...", isError: false });
         if (profile && profile.role === "seller") {
@@ -51,7 +51,7 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
     } catch (err: any) {
       console.error(err);
       setMessage({
-        text: err?.message || "Authentication failed. Please check your email and password.",
+        text: err?.message || "Authentication error. Please try again.",
         isError: true,
       });
     } finally {
@@ -59,25 +59,69 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
     }
   };
 
-  const handleQuickGuestAccess = (asRole: "builder" | "seller") => {
-    setActiveRole(asRole);
-    if (asRole === "seller") {
-      router.push("/seller-dashboard");
-    } else {
-      router.push("/builder-dashboard");
+  const handleQuickSignIn = async (asRole: "builder" | "seller") => {
+    setLoading(true);
+    try {
+      await quickLogin(asRole);
+      if (asRole === "seller") {
+        router.push("/seller-dashboard");
+      } else {
+        router.push("/builder-dashboard");
+      }
+    } catch (err: any) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-7 shadow-xs space-y-4 text-left">
+    <div className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-card space-y-5 text-left">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-        <h3 className="font-bold text-slate-900 text-base text-balance">
-          {mode === "login" ? "Sign In to Bondor" : "Create an Account"}
-        </h3>
-        <span className="text-[11px] font-semibold text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200/80">
-          Verified Access
+        <div>
+          <h3 className="font-bold text-slate-900 text-lg font-serif">
+            {mode === "login" ? "Sign In to Bondor" : "Create Maker Account"}
+          </h3>
+          <p className="text-xs text-slate-500 font-normal">
+            Enter the production harbor
+          </p>
+        </div>
+        <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80">
+          Full Access
         </span>
+      </div>
+
+      {/* 1-Click Instant Sign-In Options */}
+      <div className="space-y-2 bg-slate-50 border border-slate-200/80 p-3.5 rounded-2xl">
+        <span className="text-[11px] text-slate-600 font-bold flex items-center gap-1">
+          <Zap size={13} className="text-amber-500" />
+          <span>Instant 1-Click Sign In:</span>
+        </span>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => handleQuickSignIn("builder")}
+            className="px-3 py-2 bg-white hover:bg-sky-50 text-slate-800 hover:text-sky-700 border border-slate-200 hover:border-sky-300 rounded-xl text-xs font-semibold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.96]"
+          >
+            <Hammer size={13} className="text-sky-600" />
+            <span>As Builder</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleQuickSignIn("seller")}
+            className="px-3 py-2 bg-white hover:bg-sky-50 text-slate-800 hover:text-sky-700 border border-slate-200 hover:border-sky-300 rounded-xl text-xs font-semibold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.96]"
+          >
+            <Store size={13} className="text-amber-600" />
+            <span>As Seller</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="relative flex py-1 items-center">
+        <div className="flex-grow border-t border-slate-200"></div>
+        <span className="flex-shrink mx-3 text-[11px] text-slate-400 font-medium">Or continue with email</span>
+        <div className="flex-grow border-t border-slate-200"></div>
       </div>
 
       {/* Mode Selector Tabs */}
@@ -121,7 +165,7 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
               <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                placeholder="e.g. Sarah Jenkins"
+                placeholder="e.g. Tanvir Ahmed"
                 className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all font-medium"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -163,7 +207,7 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
 
         {mode === "signup" && (
           <div className="space-y-1.5 pt-1">
-            <label className="text-xs font-semibold text-slate-700">Select Role</label>
+            <label className="text-xs font-semibold text-slate-700">Account Type</label>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
@@ -216,7 +260,7 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
           rightIcon={<ArrowRight size={14} />}
           className="mt-2"
         >
-          {mode === "signup" ? "Create Account" : "Sign In"}
+          {mode === "signup" ? "Create Account & Enter" : "Sign In & Enter"}
         </Button>
 
         {message && (
@@ -236,29 +280,6 @@ export const AuthWidget: React.FC<AuthWidgetProps> = ({ initialMode = "login" })
           </div>
         )}
       </form>
-
-      {/* Quick Demo Access */}
-      <div className="pt-2 border-t border-slate-100 space-y-2">
-        <span className="text-[11px] text-slate-500 font-semibold block text-center uppercase tracking-wider">
-          Instant Preview (Guest Access)
-        </span>
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => handleQuickGuestAccess("builder")}
-            className="px-2 py-2 bg-slate-50 hover:bg-sky-50 text-slate-800 border border-slate-200 hover:border-sky-300 rounded-xl text-xs font-semibold transition-all shadow-xs cursor-pointer"
-          >
-            Explore as Builder
-          </button>
-          <button
-            type="button"
-            onClick={() => handleQuickGuestAccess("seller")}
-            className="px-2 py-2 bg-slate-50 hover:bg-sky-50 text-slate-800 border border-slate-200 hover:border-sky-300 rounded-xl text-xs font-semibold transition-all shadow-xs cursor-pointer"
-          >
-            Explore as Seller
-          </button>
-        </div>
-      </div>
     </div>
   );
 };
