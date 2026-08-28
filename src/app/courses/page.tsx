@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -12,6 +12,61 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/Button";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { BookOpen, Package, Search, ArrowLeft } from "lucide-react";
+
+const DEFAULT_COURSES: Course[] = [
+  {
+    id: "course_tshirt_01",
+    title: "Commercial Screenprinting Masterclass for Bangladeshi Makers",
+    description: "Complete studio guide covering emulsion coating, darkroom exposure, plastisol ink mixing, and curing 180 GSM combed cotton tees.",
+    business: "tshirt",
+    price: 2500,
+    sellerId: "seller_dhaka_01",
+    links: [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    createdAt: Date.now(),
+  },
+  {
+    id: "course_candle_01",
+    title: "Artisan Soy Wax & Aroma Blending Workshop",
+    description: "Master temperature control, cotton and wooden wick calibration, essential oil flashpoints, and crystal-clear candle setting.",
+    business: "candle",
+    price: 1800,
+    sellerId: "seller_sylhet_01",
+    links: [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    createdAt: Date.now(),
+  },
+  {
+    id: "course_soap_01",
+    title: "Cold-Process Organic Soap Formulation & Chemistry",
+    description: "Learn lye safety, saponification value calculations, botanical infusions, swirling techniques, and cure rack management.",
+    business: "soap",
+    price: 2200,
+    sellerId: "seller_ctg_01",
+    links: [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    createdAt: Date.now(),
+  },
+  {
+    id: "course_mug_01",
+    title: "Sublimation Heat-Press & Merchandise Production",
+    description: "Learn color profile calibration, sublimation paper pressing on ceramic mugs, aluminum bottles, and micro-brand packaging.",
+    business: "mug",
+    price: 1500,
+    sellerId: "seller_dhaka_02",
+    links: [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    createdAt: Date.now(),
+  },
+];
 
 function CoursesContent() {
   const searchParams = useSearchParams();
@@ -46,62 +101,8 @@ function CoursesContent() {
     fetchEnrollments();
   }, [user]);
 
-  const DEFAULT_COURSES: Course[] = [
-    {
-      id: "course_tshirt_01",
-      title: "Commercial Screenprinting Masterclass for Bangladeshi Makers",
-      description: "Complete studio guide covering emulsion coating, darkroom exposure, plastisol ink mixing, and curing 180 GSM combed cotton tees.",
-      business: "tshirt",
-      price: 2500,
-      sellerId: "seller_dhaka_01",
-      links: [
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-      ],
-      createdAt: Date.now(),
-    },
-    {
-      id: "course_candle_01",
-      title: "Artisan Soy Wax & Aroma Blending Workshop",
-      description: "Master temperature control, cotton and wooden wick calibration, essential oil flashpoints, and crystal-clear candle setting.",
-      business: "candle",
-      price: 1800,
-      sellerId: "seller_sylhet_01",
-      links: [
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-      ],
-      createdAt: Date.now(),
-    },
-    {
-      id: "course_soap_01",
-      title: "Cold-Process Organic Soap Formulation & Chemistry",
-      description: "Learn lye safety, saponification value calculations, botanical infusions, swirling techniques, and cure rack management.",
-      business: "soap",
-      price: 2200,
-      sellerId: "seller_ctg_01",
-      links: [
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-      ],
-      createdAt: Date.now(),
-    },
-    {
-      id: "course_mug_01",
-      title: "Sublimation Heat-Press & Merchandise Production",
-      description: "Learn color profile calibration, sublimation paper pressing on ceramic mugs, aluminum bottles, and micro-brand packaging.",
-      business: "mug",
-      price: 1500,
-      sellerId: "seller_dhaka_02",
-      links: [
-        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-      ],
-      createdAt: Date.now(),
-    },
-  ];
-
   useEffect(() => {
+    let cancelled = false;
     const fetchCourses = async () => {
       setLoading(true);
       try {
@@ -110,24 +111,28 @@ function CoursesContent() {
         snap.forEach((doc) => {
           list.push({ id: doc.id, ...(doc.data() as Omit<Course, "id">) });
         });
-        setCourses(list.length > 0 ? list : DEFAULT_COURSES);
+        if (!cancelled) setCourses(list.length > 0 ? list : DEFAULT_COURSES);
       } catch (err) {
         console.error("Error fetching courses, using defaults:", err);
-        setCourses(DEFAULT_COURSES);
+        if (!cancelled) setCourses(DEFAULT_COURSES);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
     fetchCourses();
+    return () => { cancelled = true; };
   }, []);
 
-  const filteredCourses = courses.filter((c) => {
-    const matchesDock = selectedDock === "all" || c.business === selectedDock;
-    const matchesSearch =
-      c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (c.description && c.description.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesDock && matchesSearch;
-  });
+  const filteredCourses = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return courses.filter((c) => {
+      const matchesDock = selectedDock === "all" || c.business === selectedDock;
+      const matchesSearch =
+        c.title.toLowerCase().includes(q) ||
+        (c.description && c.description.toLowerCase().includes(q));
+      return matchesDock && matchesSearch;
+    });
+  }, [courses, selectedDock, searchQuery]);
 
   return (
     <div className="space-y-8">

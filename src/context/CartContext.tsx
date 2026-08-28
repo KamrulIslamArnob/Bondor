@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { CartItem } from "@/types";
 import { getPriceOrRandom } from "@/lib/price-utils";
 
@@ -55,7 +55,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [cart, isLoaded]);
 
-  const addToCart = (item: Omit<CartItem, "qty"> & { qty?: number }) => {
+  const addToCart = useCallback((item: Omit<CartItem, "qty"> & { qty?: number }) => {
     setCart((prev) => {
       const displayPrice = getPriceOrRandom(item.id, item.price);
       const qtyToAdd = item.qty && item.qty > 0 ? item.qty : 1;
@@ -84,15 +84,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         },
       ];
     });
-  };
+  }, []);
 
-  const removeFromCart = (id: string, type: "course" | "product") => {
+  const removeFromCart = useCallback((id: string, type: "course" | "product") => {
     setCart((prev) => prev.filter((c) => !(c.id === id && c.type === type)));
-  };
+  }, []);
 
-  const updateQuantity = (id: string, type: "course" | "product", qty: number) => {
+  const updateQuantity = useCallback((id: string, type: "course" | "product", qty: number) => {
     if (qty <= 0) {
-      removeFromCart(id, type);
+      setCart((prev) => prev.filter((c) => !(c.id === id && c.type === type)));
       return;
     }
     setCart((prev) =>
@@ -100,37 +100,37 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         item.id === id && item.type === type ? { ...item, qty } : item
       )
     );
-  };
+  }, []);
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     setCart([]);
     try {
       localStorage.removeItem(CART_KEY);
     } catch (e) {
       console.error(e);
     }
-  };
+  }, []);
 
-  const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+  const cartCount = useMemo(() => cart.reduce((sum, item) => sum + (item.qty || 1), 0), [cart]);
 
-  const cartTotal = cart.reduce((sum, item) => {
+  const cartTotal = useMemo(() => cart.reduce((sum, item) => {
     const price = Number(item.price) || 0;
     const qty = Number(item.qty) || 1;
     return sum + price * qty;
-  }, 0);
+  }, 0), [cart]);
+
+  const contextValue = useMemo(() => ({
+    cart,
+    cartCount,
+    cartTotal,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+  }), [cart, cartCount, cartTotal, addToCart, removeFromCart, updateQuantity, clearCart]);
 
   return (
-    <CartContext.Provider
-      value={{
-        cart,
-        cartCount,
-        cartTotal,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-      }}
-    >
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   );

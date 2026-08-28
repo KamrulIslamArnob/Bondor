@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 import { 
   ArrowRight, 
@@ -16,15 +15,10 @@ import Link from "next/link";
 
 export const HeroSection: React.FC = () => {
   const router = useRouter();
-  const { quickLogin } = useAuth();
 
-  const handleQuickStart = async (role: "builder" | "seller") => {
-    await quickLogin(role);
-    if (role === "seller") {
-      router.push("/seller-dashboard");
-    } else {
-      router.push("/builder-dashboard");
-    }
+  const handleQuickStart = (role: "builder" | "seller") => {
+    // Proper auth: redirect to signup with role hint — no local mock bypass
+    router.push(`/signup?role=${role}`);
   };
 
   const categories = [

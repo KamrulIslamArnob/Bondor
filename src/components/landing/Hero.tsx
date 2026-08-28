@@ -2,16 +2,12 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
-import { ArrowRight, Hammer, Store, Search, Sparkles, Anchor, CheckCircle2, ShieldCheck } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Hammer, Store, Search, Anchor, CheckCircle2 } from "lucide-react";
 
 export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
   const router = useRouter();
-  const { quickLogin } = useAuth();
   const [promptQuery, setPromptQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,18 +20,8 @@ export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
     }
   };
 
-  const handleQuickEnter = async (role: "builder" | "seller") => {
-    setIsAuthenticating(true);
-    try {
-      await quickLogin(role);
-      if (role === "seller") {
-        router.push("/seller-dashboard");
-      } else {
-        router.push("/builder-dashboard");
-      }
-    } finally {
-      setIsAuthenticating(false);
-    }
+  const handleQuickEnter = (role: "builder" | "seller") => {
+    router.push(`/signup?role=${role}`);
   };
 
   return (
@@ -126,7 +112,6 @@ export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
                 <button
                   type="button"
                   onClick={() => handleQuickEnter("builder")}
-                  disabled={isAuthenticating}
                   className="px-6 py-3 bg-white hover:bg-slate-100 active:scale-[0.96] text-slate-900 font-bold rounded-lg text-xs sm:text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer"
                 >
                   <Hammer size={15} className="text-blue-600" />
@@ -136,7 +121,6 @@ export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
                 <button
                   type="button"
                   onClick={() => handleQuickEnter("seller")}
-                  disabled={isAuthenticating}
                   className="px-6 py-3 bg-white/15 hover:bg-white/25 active:scale-[0.96] text-white border border-white/80 rounded-lg text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer backdrop-blur-md"
                 >
                   <Store size={15} className="text-sky-300" />

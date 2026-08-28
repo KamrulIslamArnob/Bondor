@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
-import { getAuth, Auth } from "firebase/auth";
+import { getAuth, Auth, browserLocalPersistence, setPersistence } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -16,4 +16,12 @@ const firebaseConfig = {
 const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const auth: Auth = getAuth(app);
 export const db: Firestore = getFirestore(app);
+
+// Enforce local persistence for reliable session across reloads — proper auth
+if (typeof window !== "undefined") {
+  setPersistence(auth, browserLocalPersistence).catch((e) => {
+    console.warn("Failed to set auth persistence:", e);
+  });
+}
+
 export default app;

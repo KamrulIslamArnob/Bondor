@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -12,6 +12,19 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { BookOpen, Package, Calculator, Search, Layers, Flame, Sparkles, Printer } from "lucide-react";
 
+const getDockIcon = (id: string) => {
+  switch (id) {
+    case "tshirt":
+      return <Layers size={20} className="text-sky-600" />;
+    case "candle":
+      return <Flame size={20} className="text-amber-600" />;
+    case "soap":
+      return <Sparkles size={20} className="text-emerald-600" />;
+    default:
+      return <Printer size={20} className="text-rose-600" />;
+  }
+};
+
 export default function BuilderDashboard() {
   const { user, userProfile, loading } = useAuth();
   const router = useRouter();
@@ -20,61 +33,77 @@ export default function BuilderDashboard() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filterCategory, setFilterCategory] = useState<string>("all");
 
+  // Auth guard: require login
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [loading, user, router]);
+
+  // RBAC guard: pure seller should use seller dashboard
+  useEffect(() => {
+    if (!loading && userProfile?.role === "seller") {
+      router.push("/seller-dashboard");
+    }
+  }, [loading, userProfile, router]);
+
   const [isCalcOpen, setIsCalcOpen] = useState(false);
   const [calcDock, setCalcDock] = useState(BUSINESS_CATEGORIES[0].id);
   const [calcUnits, setCalcUnits] = useState(100);
 
-  const getDockIcon = (id: string) => {
-    switch (id) {
-      case "tshirt":
-        return <Layers size={20} className="text-sky-600" />;
-      case "candle":
-        return <Flame size={20} className="text-amber-600" />;
-      case "soap":
-        return <Sparkles size={20} className="text-emerald-600" />;
-      default:
-        return <Printer size={20} className="text-rose-600" />;
-    }
-  };
-
   useEffect(() => {
-    if (user) {
-      const fetchCounts = async () => {
-        try {
-          const enrollSnap = await getDocs(
-            query(collection(db, "enrollments"), where("userId", "==", user.uid))
-          );
+    if (!user) return;
+    let cancelled = false;
+    const fetchCounts = async () => {
+      try {
+        const [enrollSnap, prodSnap] = await Promise.all([
+          getDocs(query(collection(db, "enrollments"), where("userId", "==", user.uid))),
+          getDocs(collection(db, "products")),
+        ]);
+        if (!cancelled) {
           setEnrolledCount(enrollSnap.size);
-
-          const prodSnap = await getDocs(collection(db, "products"));
           setMaterialsCount(prodSnap.size);
-        } catch (e) {
-          console.error("Error fetching stats:", e);
         }
-      };
-      fetchCounts();
-    }
+      } catch (e) {
+        console.error("Error fetching stats:", e);
+      }
+    };
+    fetchCounts();
+    return () => { cancelled = true; };
   }, [user]);
 
   if (loading) {
     return <LoadingSpinner message="Loading builder workspace..." />;
   }
 
-  const filteredDocks = BUSINESS_CATEGORIES.filter((dock) => {
-    const matchesSearch =
-      dock.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dock.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dock.code.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter = filterCategory === "all" || dock.id === filterCategory;
-    return matchesSearch && matchesFilter;
-  });
+  if (!user) {
+    return <LoadingSpinner message="Redirecting to sign in..." />;
+  }
 
-  const selectedCalcDock = BUSINESS_CATEGORIES.find((d) => d.id === calcDock) || BUSINESS_CATEGORIES[0];
-  const estKitCost = calcDock === "tshirt" ? 1200 : calcDock === "candle" ? 850 : calcDock === "soap" ? 650 : 450;
-  const kitsNeeded = Math.ceil(calcUnits / 25);
-  const totalSupplyCost = kitsNeeded * estKitCost;
-  const estimatedRevenue = calcUnits * (estKitCost / 12);
-  const estimatedProfit = estimatedRevenue - totalSupplyCost;
+  if (userProfile?.role === "seller") {
+    return <LoadingSpinner message="Redirecting to seller workspace..." />;
+  }
+
+  const filteredDocks = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return BUSINESS_CATEGORIES.filter((dock) => {
+      const matchesSearch =
+        dock.title.toLowerCase().includes(q) ||
+        dock.subtitle.toLowerCase().includes(q) ||
+        dock.code.toLowerCase().includes(q);
+      const matchesFilter = filterCategory === "all" || dock.id === filterCategory;
+      return matchesSearch && matchesFilter;
+    });
+  }, [searchQuery, filterCategory]);
+
+  const selectedCalcDock = useMemo(() => BUSINESS_CATEGORIES.find((d) => d.id === calcDock) || BUSINESS_CATEGORIES[0], [calcDock]);
+  const { estKitCost, kitsNeeded, totalSupplyCost, estimatedRevenue, estimatedProfit } = useMemo(() => {
+    const cost = calcDock === "tshirt" ? 1200 : calcDock === "candle" ? 850 : calcDock === "soap" ? 650 : 450;
+    const kits = Math.ceil(calcUnits / 25);
+    const total = kits * cost;
+    const revenue = calcUnits * (cost / 12);
+    return { estKitCost: cost, kitsNeeded: kits, totalSupplyCost: total, estimatedRevenue: revenue, estimatedProfit: revenue - total };
+  }, [calcDock, calcUnits]);
 
   return (
     <div className="space-y-8">

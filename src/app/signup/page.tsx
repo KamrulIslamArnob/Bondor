@@ -1,16 +1,20 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { AuthWidget } from "@/components/landing/AuthWidget";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import Link from "next/link";
 import { Anchor } from "lucide-react";
+import { UserRole } from "@/types";
 
-export default function SignupPage() {
+function SignupContent() {
   const { user, userProfile, loading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const roleParam = searchParams.get("role") as UserRole | null;
+  const initialRole: UserRole = roleParam === "seller" || roleParam === "both" || roleParam === "builder" ? roleParam : "builder";
 
   useEffect(() => {
     if (!loading && user) {
@@ -29,7 +33,6 @@ export default function SignupPage() {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center py-12 px-4 sm:px-6">
       <div className="w-full max-w-md space-y-6 flex flex-col items-center">
-        {/* Brand Header */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="w-9 h-9 rounded-xl bg-sky-600 text-white flex items-center justify-center font-bold shadow-xs">
             <Anchor size={18} />
@@ -38,10 +41,7 @@ export default function SignupPage() {
             Bondor
           </span>
         </Link>
-
-        {/* Dedicated Auth Form Card */}
-        <AuthWidget initialMode="signup" />
-
+        <AuthWidget initialMode="signup" initialRole={initialRole} />
         <p className="text-xs text-slate-500 text-center">
           Already have an account?{" "}
           <Link href="/login" className="font-bold text-sky-600 hover:text-sky-700 underline">
@@ -50,5 +50,13 @@ export default function SignupPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<LoadingSpinner message="Preparing signup..." />}>
+      <SignupContent />
+    </Suspense>
   );
 }

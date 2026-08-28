@@ -2,21 +2,14 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 import { ArrowRight, Hammer, Store } from "lucide-react";
 
 export const FinalCtaSection: React.FC = () => {
   const router = useRouter();
-  const { quickLogin } = useAuth();
 
-  const handleQuickStart = async (role: "builder" | "seller") => {
-    await quickLogin(role);
-    if (role === "seller") {
-      router.push("/seller-dashboard");
-    } else {
-      router.push("/builder-dashboard");
-    }
+  const handleQuickStart = (role: "builder" | "seller") => {
+    router.push(`/signup?role=${role}`);
   };
 
   return (

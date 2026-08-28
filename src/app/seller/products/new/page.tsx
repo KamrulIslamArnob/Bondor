@@ -12,7 +12,7 @@ import { ArrowLeft, Plus, Trash2, ArrowRight, Package } from "lucide-react";
 
 export default function AddProductPage() {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, userProfile, loading: authLoading } = useAuth();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,6 +21,12 @@ export default function AddProductPage() {
   const [category, setCategory] = useState<string>("tshirt");
   const [imageUrls, setImageUrls] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
+
+  // RBAC guard: only seller/both can add products
+  React.useEffect(() => {
+    if (!authLoading && !user) router.push("/login");
+    if (!authLoading && userProfile && userProfile.role === "builder") router.push("/builder-dashboard");
+  }, [authLoading, user, userProfile, router]);
 
   const handleAddImageUrl = () => {
     setImageUrls([...imageUrls, ""]);

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, memo } from "react";
 import Link from "next/link";
 import { Product } from "@/types";
 import { formatPrice } from "@/lib/price-utils";
@@ -13,14 +13,14 @@ interface ProductCardProps {
   product: Product;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = memo(({ product }) => {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
 
   const firstImg = product.images && product.images.length > 0 ? product.images[0] : "";
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     addToCart({
       id: product.id,
       type: "product",
@@ -32,7 +32,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
-  };
+  }, [addToCart, product.id, product.name, product.description, product.price, firstImg, quantity]);
+
+  const decrement = useCallback(() => setQuantity((q) => Math.max(1, q - 1)), []);
+  const increment = useCallback(() => setQuantity((q) => Math.min(product.stock, q + 1)), [product.stock]);
 
   return (
     <div className="bg-white border border-slate-200/80 rounded-2xl p-5 flex flex-col justify-between gap-4 transition-[box-shadow,border-color,transform] duration-200 group shadow-xs hover:shadow-card hover:border-sky-300 hover:-translate-y-0.5">
@@ -43,6 +46,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <img
               src={firstImg}
               alt={product.name}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
             />
           ) : (
@@ -83,9 +88,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* Quantity Stepper */}
           <div className="inline-flex items-center gap-1 border border-slate-200 bg-slate-50/80 rounded-full p-0.5 shadow-xs">
             <button
-              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              onClick={decrement}
               className="p-1 hover:bg-white rounded-full text-slate-700 transition-colors cursor-pointer"
               title="Decrease quantity"
+              aria-label="Decrease quantity"
             >
               <Minus size={12} />
             </button>
@@ -93,9 +99,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {quantity}
             </span>
             <button
-              onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+              onClick={increment}
               className="p-1 hover:bg-white rounded-full text-slate-700 transition-colors cursor-pointer"
               title="Increase quantity"
+              aria-label="Increase quantity"
             >
               <Plus size={12} />
             </button>
@@ -120,4 +127,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
     </div>
   );
-};
+});
+
+ProductCard.displayName = "ProductCard";

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -23,36 +23,37 @@ export default function SellerDashboard() {
   const [loadingData, setLoadingData] = useState<boolean>(false);
   const [timeRange, setTimeRange] = useState<"7d" | "30d" | "all">("30d");
 
-  const loadSellerData = async (uid: string) => {
+  const loadSellerData = useCallback(async (uid: string) => {
     setLoadingData(true);
     try {
-      const pSnap = await getDocs(query(collection(db, "products"), where("sellerId", "==", uid)));
+      const [pSnap, cSnap] = await Promise.all([
+        getDocs(query(collection(db, "products"), where("sellerId", "==", uid))),
+        getDocs(query(collection(db, "courses"), where("sellerId", "==", uid))),
+      ]);
       const pList: Product[] = [];
       pSnap.forEach((d) => {
         pList.push({ id: d.id, ...(d.data() as Omit<Product, "id">) });
       });
-      setProducts(pList);
-
-      const cSnap = await getDocs(query(collection(db, "courses"), where("sellerId", "==", uid)));
       const cList: Course[] = [];
       cSnap.forEach((d) => {
         cList.push({ id: d.id, ...(d.data() as Omit<Course, "id">) });
       });
+      setProducts(pList);
       setCourses(cList);
     } catch (err) {
       console.error("Error loading seller data:", err);
     } finally {
       setLoadingData(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (user) {
       loadSellerData(user.uid);
     }
-  }, [user]);
+  }, [user, loadSellerData]);
 
-  const handleDeleteProduct = async (id: string) => {
+  const handleDeleteProduct = useCallback(async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this material pack?")) return;
     try {
       await deleteDoc(doc(db, "products", id));
@@ -61,9 +62,9 @@ export default function SellerDashboard() {
       console.error("Failed to delete product:", err);
       alert("Failed to delete product.");
     }
-  };
+  }, []);
 
-  const handleDeleteCourse = async (id: string) => {
+  const handleDeleteCourse = useCallback(async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this course?")) return;
     try {
       await deleteDoc(doc(db, "courses", id));
@@ -72,23 +73,44 @@ export default function SellerDashboard() {
       console.error("Failed to delete course:", err);
       alert("Failed to delete course.");
     }
-  };
+  }, []);
+
+  // Auth guard
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [loading, user, router]);
+
+  useEffect(() => {
+    if (!loading && userProfile?.role === "builder") {
+      router.push("/builder-dashboard");
+    }
+  }, [loading, userProfile, router]);
 
   if (loading) {
     return <LoadingSpinner message="Loading seller workspace..." />;
   }
 
-  const earningsByRange = {
+  if (!user) {
+    return <LoadingSpinner message="Redirecting to sign in..." />;
+  }
+
+  if (userProfile?.role === "builder") {
+    return <LoadingSpinner message="Redirecting to builder workspace..." />;
+  }
+
+  const earningsByRange = useMemo(() => ({
     "7d": 4800,
     "30d": 18400,
     all: 52600,
-  }[timeRange];
+  }[timeRange]), [timeRange]);
 
-  const ordersByRange = {
+  const ordersByRange = useMemo(() => ({
     "7d": 4,
     "30d": 16,
     all: 48,
-  }[timeRange];
+  }[timeRange]), [timeRange]);
 
   return (
     <div className="space-y-8">

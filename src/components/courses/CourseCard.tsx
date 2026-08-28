@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback, memo } from "react";
 import { Course } from "@/types";
 import { getPriceOrRandom, formatPrice } from "@/lib/price-utils";
 import { getBusinessLabel } from "@/lib/constants";
@@ -8,22 +8,22 @@ import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { CoursePreviewModal } from "./CoursePreviewModal";
 import { Button } from "@/components/ui/Button";
-import { Check, Play, ShoppingCart, Video } from "lucide-react";
+import { Play, ShoppingCart } from "lucide-react";
 
 interface CourseCardProps {
   course: Course;
   isEnrolled?: boolean;
 }
 
-export const CourseCard: React.FC<CourseCardProps> = ({ course, isEnrolled = false }) => {
+export const CourseCard: React.FC<CourseCardProps> = memo(({ course, isEnrolled = false }) => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const { addToCart } = useCart();
   const router = useRouter();
 
-  const displayPrice = getPriceOrRandom(course.id, course.price);
-  const moduleCount = Array.isArray(course.links) ? course.links.length : 0;
+  const displayPrice = useMemo(() => getPriceOrRandom(course.id, course.price), [course.id, course.price]);
+  const moduleCount = useMemo(() => Array.isArray(course.links) ? course.links.length : 0, [course.links]);
 
-  const handleBuyNow = () => {
+  const handleBuyNow = useCallback(() => {
     if (isEnrolled) return;
     addToCart({
       id: course.id,
@@ -34,7 +34,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, isEnrolled = fal
       image: "",
     });
     router.push("/cart");
-  };
+  }, [isEnrolled, addToCart, course.id, course.title, course.description, displayPrice, router]);
+
+  const openPreview = useCallback(() => setIsPreviewOpen(true), []);
+  const closePreview = useCallback(() => setIsPreviewOpen(false), []);
 
   return (
     <>
@@ -74,7 +77,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, isEnrolled = fal
               variant="default"
               size="sm"
               fullWidth
-              onClick={() => setIsPreviewOpen(true)}
+              onClick={openPreview}
               leftIcon={<Play size={13} />}
             >
               Watch Masterclass
@@ -93,7 +96,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, isEnrolled = fal
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={() => setIsPreviewOpen(true)}
+                onClick={openPreview}
                 leftIcon={<Play size={12} className="text-sky-600" />}
               >
                 Curriculum
@@ -106,8 +109,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, isEnrolled = fal
       <CoursePreviewModal
         course={course}
         isOpen={isPreviewOpen}
-        onClose={() => setIsPreviewOpen(false)}
+        onClose={closePreview}
       />
     </>
   );
-};
+});
+
+CourseCard.displayName = "CourseCard";

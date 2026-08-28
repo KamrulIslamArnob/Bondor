@@ -27,6 +27,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onOpenMobileMe
   const { cartCount } = useCart();
 
   const isSeller = activeRole === "seller";
+  const isBoth = userProfile?.role === "both";
 
   const getPageTitle = () => {
     if (pathname.startsWith("/builder-dashboard")) return "Business Docks";
@@ -43,6 +44,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onOpenMobileMe
   };
 
   const handleRoleToggle = () => {
+    if (!isBoth) return;
     const nextRole = isSeller ? "builder" : "seller";
     setActiveRole(nextRole);
     if (nextRole === "seller") {
@@ -78,24 +80,32 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onOpenMobileMe
       {/* Right: Role Switcher, Cart, Action Shortcuts */}
       <div className="flex items-center gap-2.5">
         {/* Workspace Mode Pill */}
-        <button
-          onClick={handleRoleToggle}
-          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition-all cursor-pointer shadow-xs"
-          title={`Click to switch to ${isSeller ? "Builder" : "Seller"} mode`}
-        >
-          {isSeller ? (
-            <>
-              <Store size={13} className="text-sky-600" />
-              <span>Seller Mode</span>
-            </>
-          ) : (
-            <>
-              <Hammer size={13} className="text-sky-600" />
-              <span>Builder Mode</span>
-            </>
-          )}
-          <span className="text-[10px] text-sky-700 font-semibold bg-sky-50 px-1.5 py-0.2 rounded-full border border-sky-200/80">Switch</span>
-        </button>
+        {isBoth ? (
+          <button
+            onClick={handleRoleToggle}
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition-all cursor-pointer shadow-xs"
+            title={`Click to switch to ${isSeller ? "Builder" : "Seller"} mode`}
+          >
+            {isSeller ? (
+              <>
+                <Store size={13} className="text-sky-600" />
+                <span>Seller Mode</span>
+              </>
+            ) : (
+              <>
+                <Hammer size={13} className="text-sky-600" />
+                <span>Builder Mode</span>
+              </>
+            )}
+            <span className="text-[10px] text-sky-700 font-semibold bg-sky-50 px-1.5 py-0.2 rounded-full border border-sky-200/80">Switch</span>
+          </button>
+        ) : (
+          <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-50 text-sky-800 border border-sky-200">
+            {isSeller ? <Store size={13} className="text-sky-600" /> : <Hammer size={13} className="text-sky-600" />}
+            <span>{isSeller ? "Seller" : "Builder"} Mode</span>
+            <span className="text-[10px] font-semibold text-slate-500 bg-white px-1.5 py-0.2 rounded-full border border-slate-200">Locked</span>
+          </span>
+        )}
 
         {/* Quick Add Shortcut for Sellers */}
         {isSeller && (

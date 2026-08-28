@@ -42,8 +42,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
   const { cartCount } = useCart();
 
   const isSeller = activeRole === "seller";
+  const isBoth = userProfile?.role === "both";
 
   const handleRoleSwitch = (role: "builder" | "seller") => {
+    if (!isBoth && userProfile?.role !== role) return; // RBAC: only "both" can switch freely
     setActiveRole(role);
     if (role === "seller") {
       router.push("/seller-dashboard");
@@ -149,35 +151,43 @@ export const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
         </div>
 
         {/* Dual Mode / Workspace Switcher */}
-        <div className="p-1 bg-white rounded-full border border-slate-200 shadow-xs">
-          <div className="grid grid-cols-2 gap-1">
-            <button
-              type="button"
-              onClick={() => handleRoleSwitch("builder")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer ${
-                !isSeller
-                  ? "bg-sky-600 text-white shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Hammer size={13} />
-              <span>Builder</span>
-            </button>
+        {isBoth ? (
+          <div className="p-1 bg-white rounded-full border border-slate-200 shadow-xs">
+            <div className="grid grid-cols-2 gap-1">
+              <button
+                type="button"
+                onClick={() => handleRoleSwitch("builder")}
+                className={`flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer ${
+                  !isSeller
+                    ? "bg-sky-600 text-white shadow-xs font-bold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Hammer size={13} />
+                <span>Builder</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => handleRoleSwitch("seller")}
-              className={`flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer ${
-                isSeller
-                  ? "bg-sky-600 text-white shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Store size={13} />
-              <span>Seller</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => handleRoleSwitch("seller")}
+                className={`flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer ${
+                  isSeller
+                    ? "bg-sky-600 text-white shadow-xs font-bold"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Store size={13} />
+                <span>Seller</span>
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center justify-center gap-2 py-2 px-3 bg-sky-50 border border-sky-200/60 rounded-full">
+            {isSeller ? <Store size={13} className="text-sky-600" /> : <Hammer size={13} className="text-sky-600" />}
+            <span className="text-xs font-bold text-sky-800 capitalize">{activeRole} Workspace</span>
+            <span className="text-[10px] font-semibold text-sky-700 bg-white px-1.5 py-0.2 rounded-full border border-sky-200">Locked</span>
+          </div>
+        )}
 
         {/* Navigation Section */}
         <div className="space-y-1 pt-1">
