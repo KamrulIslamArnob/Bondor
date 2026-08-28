@@ -99,19 +99,20 @@ export const HeroSection: React.FC = () => {
         </p>
       </motion.div>
 
-      {/* 5 Category Bento Cards Row with Stagger Animation */}
+      {/* 5 Category Bento Cards Row with Stagger Animation & Responsive Balance */}
       <motion.div 
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
         className="max-w-6xl mx-auto px-4 sm:px-6"
       >
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 text-left">
-          {categories.map((cat) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 text-left">
+          {categories.map((cat, idx) => (
             <motion.div
               key={cat.id}
               whileHover={{ y: -4, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 350, damping: 25 }}
+              className={`h-full ${idx === 4 ? "sm:col-span-2 md:col-span-1 lg:col-span-1" : ""}`}
             >
               <Link
                 href={cat.href}
