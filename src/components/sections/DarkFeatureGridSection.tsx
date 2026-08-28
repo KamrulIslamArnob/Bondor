@@ -10,19 +10,16 @@ export const DarkFeatureGridSection: React.FC = () => {
     {
       icon: <Settings size={22} className="text-blue-400" />,
       title: "20+ Starter Pack Ratios",
-      bnTitle: "২০+ পাইকারি কাঁচামাল প্যাক",
       desc: "Order and scale small-batch production with verified ingredient ratios and certified raw supply packs.",
     },
     {
       icon: <Bell size={22} className="text-emerald-400" />,
       title: "Automated Dispatch Alerts",
-      bnTitle: "রিয়েল-টাইম কুরিয়ার আপডেট",
       desc: "Get notified about package updates, raw material arrivals, and batch completion timelines across Bangladesh.",
     },
     {
       icon: <Code2 size={22} className="text-purple-400" />,
       title: "Stripe Escrow Architecture",
-      bnTitle: "১০০% নিরাপদ এসক্রো পেমেন্ট",
       desc: "Complete purchases securely with Stripe payment gateway. Funds are safeguarded until shipment is verified.",
     },
   ];
@@ -42,7 +39,7 @@ export const DarkFeatureGridSection: React.FC = () => {
         {/* Header */}
         <div className="relative z-10 max-w-2xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-950/80 border border-blue-500/30 rounded-full text-xs font-bold text-blue-300">
-            <span className="font-hind">শিল্প-মানের পাইকারি সাপ্লাই প্ল্যাটফর্ম</span>
+            <span>Industrial-Grade Wholesale Platform</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif">
             Scale production with an industry-grade supply network
@@ -68,9 +65,6 @@ export const DarkFeatureGridSection: React.FC = () => {
                 <h3 className="text-base sm:text-lg font-bold text-white font-serif">
                   {f.title}
                 </h3>
-                <span className="font-hind text-xs font-semibold text-blue-400 block">
-                  {f.bnTitle}
-                </span>
                 <p className="text-xs text-slate-400 leading-relaxed font-normal pt-1">
                   {f.desc}
                 </p>
@@ -86,7 +80,7 @@ export const DarkFeatureGridSection: React.FC = () => {
               href="/materials"
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl text-xs sm:text-sm transition-colors shadow-md cursor-pointer"
             >
-              <span className="font-hind font-bold">পাইকারি কাঁচামাল প্যাক দেখুন</span>
+              <span>Browse Wholesale Material Packs</span>
               <ArrowRight size={14} />
             </Link>
           </motion.div>

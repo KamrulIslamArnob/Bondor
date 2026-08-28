@@ -29,12 +29,12 @@ export const SupportTeamSection: React.FC = () => {
               <span className="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums font-serif">
                 9.8
               </span>
-              <span className="font-hind text-[10px] font-bold text-slate-600 uppercase tracking-wider">
-                গ্রাহক সন্তুষ্টি স্কোর
+              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">
+                MAKER SATISFACTION
               </span>
             </motion.div>
 
-            {/* Floating Avatars with Subtle Offset Animations */}
+            {/* Floating Avatars */}
             <img
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
               alt="Artisan maker"
@@ -68,7 +68,7 @@ export const SupportTeamSection: React.FC = () => {
         >
           <div className="space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200/80 rounded-full text-xs font-bold text-blue-700">
-              <span className="font-hind">২৪/৭ ওয়ার্কশপ সাপোর্ট</span>
+              <span>24/7 Workshop Guidance</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
               Best-in-class guidance{" "}
@@ -85,7 +85,7 @@ export const SupportTeamSection: React.FC = () => {
                 href="/signup"
                 className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
               >
-                <span className="font-hind font-bold">মেকার কমিউনিটিতে যোগ দিন</span>
+                <span>Join the Maker Harbor</span>
                 <ArrowRight size={15} />
               </Link>
             </motion.div>

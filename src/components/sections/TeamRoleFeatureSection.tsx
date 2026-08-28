@@ -2,17 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Hammer, Store, Sparkles, Layers, ArrowRight, CheckCircle2, Box, BookOpen } from "lucide-react";
 
 export const TeamRoleFeatureSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const tabs = [
-    { name: "All-Round Builder", bnName: "সার্বিক বিল্ডার", role: "builder" },
-    { name: "Apparel Printer", bnName: "টি-শার্ট প্রিন্টার", role: "apparel" },
-    { name: "Candle Artisan", bnName: "মোমবাতি কারিগর", role: "candle" },
-    { name: "Wholesale Supplier", bnName: "পাইকারি সাপ্লায়ার", role: "seller" },
+    { name: "All-Round Builder", role: "builder" },
+    { name: "Apparel Printer", role: "apparel" },
+    { name: "Candle Artisan", role: "candle" },
+    { name: "Wholesale Supplier", role: "seller" },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
         {/* Title */}
         <div className="space-y-3 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-bold text-sky-300">
-            <span className="font-hind">সকল উদ্যোক্তা ও ভেন্ডরের জন্য</span>
+            <span>Role-Based Workspace Architecture</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif">
             A feature set for everyone in your workshop
@@ -45,19 +45,18 @@ export const TeamRoleFeatureSection: React.FC = () => {
               whileTap={{ scale: 0.96 }}
               type="button"
               onClick={() => setActiveTab(idx)}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 activeTab === idx
                   ? "bg-white text-slate-950 shadow-md font-bold"
                   : "bg-white/10 text-slate-300 hover:bg-white/15"
               }`}
             >
-              <span>{tab.name}</span>
-              <span className="font-hind opacity-75">({tab.bnName})</span>
+              {tab.name}
             </motion.button>
           ))}
         </div>
 
-        {/* 3 Column Feature Previews with Animation */}
+        {/* 3 Column Feature Previews */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
           {/* Card 1 */}
           <motion.div 
@@ -68,10 +67,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
               <h3 className="text-base font-bold text-white font-serif">
                 Screenprint &amp; Apparel Lab
               </h3>
-              <span className="font-hind text-xs font-semibold text-blue-400 block">
-                টি-শার্ট ও ফেব্রিক প্রিন্টিং ল্যাব
-              </span>
-              <p className="text-xs text-slate-400 leading-relaxed font-normal pt-1">
+              <p className="text-xs text-slate-400 leading-relaxed font-normal">
                 Loop tested ink formulas and mesh calibration into your production workflow for seamless apparel runs.
               </p>
             </div>
@@ -80,9 +76,9 @@ export const TeamRoleFeatureSection: React.FC = () => {
             <div className="bg-white/10 rounded-xl p-3.5 border border-white/10 flex items-center justify-between text-xs text-slate-200">
               <div className="flex items-center gap-2">
                 <Layers size={15} className="text-blue-400" />
-                <span className="font-bold font-hind">ইমালশন ক্যালিব্রেশন</span>
+                <span className="font-bold">Emulsion Calibration</span>
               </div>
-              <span className="text-[10px] text-emerald-400 font-bold font-hind">১৮০ GSM রেডি</span>
+              <span className="text-[10px] text-emerald-400 font-bold">180 GSM Ready</span>
             </div>
           </motion.div>
 
@@ -95,10 +91,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
               <h3 className="text-base font-bold text-white font-serif">
                 Starter Packs &amp; Raw Supplies
               </h3>
-              <span className="font-hind text-xs font-semibold text-amber-400 block">
-                স্টার্টার প্যাক ও পাইকারি কাঁচামাল
-              </span>
-              <p className="text-xs text-slate-400 leading-relaxed font-normal pt-1">
+              <p className="text-xs text-slate-400 leading-relaxed font-normal">
                 Order pre-calibrated material bundles without paying retail middlemen markups or dealing with unverified quality.
               </p>
             </div>
@@ -107,9 +100,9 @@ export const TeamRoleFeatureSection: React.FC = () => {
             <div className="bg-white/10 rounded-xl p-3.5 border border-white/10 flex items-center justify-between text-xs text-slate-200">
               <div className="flex items-center gap-2">
                 <Box size={15} className="text-amber-400" />
-                <span className="font-bold font-hind">সয় ওয়াক্স ও সলতে কিট</span>
+                <span className="font-bold">Soy Wax &amp; Wicks Kit</span>
               </div>
-              <span className="text-[10px] text-amber-300 font-bold font-hind">১ কেজি প্যাক</span>
+              <span className="text-[10px] text-amber-300 font-bold">1kg Pack</span>
             </div>
           </motion.div>
 
@@ -122,10 +115,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
               <h3 className="text-base font-bold text-white font-serif">
                 Vendor &amp; Academy Hub
               </h3>
-              <span className="font-hind text-xs font-semibold text-purple-400 block">
-                ভেন্ডর পোর্টাল ও ভিডিও একাডেমি
-              </span>
-              <p className="text-xs text-slate-400 leading-relaxed font-normal pt-1">
+              <p className="text-xs text-slate-400 leading-relaxed font-normal">
                 Manage product listings, monitor batch orders, and publish comprehensive video masterclasses from one dashboard.
               </p>
             </div>
@@ -134,9 +124,9 @@ export const TeamRoleFeatureSection: React.FC = () => {
             <div className="bg-white/10 rounded-xl p-3.5 border border-white/10 flex items-center justify-between text-xs text-slate-200">
               <div className="flex items-center gap-2">
                 <BookOpen size={15} className="text-purple-400" />
-                <span className="font-bold font-hind">কোর্স মার্কেটপ্লেস</span>
+                <span className="font-bold">Course Marketplace</span>
               </div>
-              <span className="text-[10px] text-purple-300 font-bold font-hind">লাইভ পোর্টাল</span>
+              <span className="text-[10px] text-purple-300 font-bold">Live Portal</span>
             </div>
           </motion.div>
         </div>
@@ -148,7 +138,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
               href="/signup"
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl text-xs sm:text-sm transition-colors shadow-md cursor-pointer"
             >
-              <span className="font-hind font-bold">বিল্ডার হিসেবে শুরু করুন</span>
+              <span>Start as Builder</span>
               <ArrowRight size={14} />
             </Link>
           </motion.div>

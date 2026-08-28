@@ -33,14 +33,14 @@ export const FinalCtaSection: React.FC = () => {
 
         <div className="relative z-10 space-y-3 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-blue-200 rounded-full text-xs font-bold text-blue-700 shadow-xs">
-            <span className="font-hind">আজই আপনার ব্যবসার যাত্রা শুরু করুন</span>
+            <span>Start Your Micro-Production Journey</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-serif text-balance">
             Stop wasting time with unverified suppliers and guesswork.
           </h2>
-          <p className="text-sm sm:text-base text-blue-900/80 font-medium font-hind">
-            বাংলাদেশে আপনার ক্ষুদ্র উৎপাদনের ডিজিটাল বন্দর গড়ে তুলুন এখনই।
+          <p className="text-sm sm:text-base text-blue-900/80 font-medium">
+            Launch your micro-manufacturing business in Bangladesh today.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export const FinalCtaSection: React.FC = () => {
             className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer"
           >
             <Hammer size={16} />
-            <span className="font-hind font-bold">বিল্ডার হিসেবে শুরু করুন</span>
+            <span>Get started as Builder</span>
             <ArrowRight size={15} />
           </motion.button>
 
@@ -65,7 +65,7 @@ export const FinalCtaSection: React.FC = () => {
             className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 font-bold rounded-xl text-sm transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
           >
             <Store size={16} className="text-blue-600" />
-            <span className="font-hind font-bold">সাপ্লায়ার ড্যাশবোর্ডে প্রবেশ</span>
+            <span>Enter as Seller</span>
           </motion.button>
         </div>
       </motion.div>

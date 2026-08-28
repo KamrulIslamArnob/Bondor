@@ -40,7 +40,7 @@ export const WorkflowsSection: React.FC = () => {
         >
           <div className="space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200/80 rounded-full text-xs font-bold text-blue-700">
-              <span className="font-hind">স্বয়ংক্রিয় উৎপাদন পাইপলাইন</span>
+              <span>Automated Production Pipeline</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
               Create continuous production workflows
@@ -69,7 +69,7 @@ export const WorkflowsSection: React.FC = () => {
             <div className="flex items-center gap-2.5">
               <span className="text-blue-600">►</span>
               <span className="text-slate-900 font-bold">Jump-start production</span>
-              <span className="text-slate-600 font-normal">with Bangla video masterclasses</span>
+              <span className="text-slate-600 font-normal">with structured video masterclasses</span>
             </div>
           </div>
 
@@ -84,7 +84,7 @@ export const WorkflowsSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Right: Modern Workshop Workflow Card Graphic with Floating Animation */}
+        {/* Right: Modern Workshop Workflow Card Graphic */}
         <motion.div 
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -103,8 +103,8 @@ export const WorkflowsSection: React.FC = () => {
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold text-slate-800">Production Pipeline: Dhaka Hub</span>
               </div>
-              <span className="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200 font-hind">
-                JSON স্পেক
+              <span className="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+                JSON Spec
               </span>
             </div>
 
@@ -112,20 +112,20 @@ export const WorkflowsSection: React.FC = () => {
             <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-slate-200/80 shadow-xs space-y-3">
               <div className="flex items-center justify-between text-xs border-b border-slate-100 pb-2">
                 <span className="font-bold text-slate-900">Batch #BD-2026-04</span>
-                <span className="text-emerald-600 font-bold font-hind">১০০% কোয়ালিটি পাস</span>
+                <span className="text-emerald-600 font-bold">100% Quality Pass</span>
               </div>
 
               <div className="grid grid-cols-3 gap-2 text-center text-xs">
                 <div className="p-2 rounded-xl bg-blue-50 border border-blue-200/60">
-                  <span className="text-[10px] text-slate-500 block font-hind">সুতি কাপড়</span>
+                  <span className="text-[10px] text-slate-500 block">Raw Fabric</span>
                   <span className="font-bold text-blue-900 text-xs">180 GSM Cotton</span>
                 </div>
                 <div className="p-2 rounded-xl bg-amber-50 border border-amber-200/60">
-                  <span className="text-[10px] text-slate-500 block font-hind">কালি ও কেমিক্যাল</span>
+                  <span className="text-[10px] text-slate-500 block">Inks &amp; Emulsion</span>
                   <span className="font-bold text-amber-900 text-xs">1kg Plastisol</span>
                 </div>
                 <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200/60">
-                  <span className="text-[10px] text-slate-500 block font-hind">আনুমানিক লাভ</span>
+                  <span className="text-[10px] text-slate-500 block">Profit Margin</span>
                   <span className="font-bold text-emerald-900 text-xs">68.4% Gross</span>
                 </div>
               </div>
@@ -133,8 +133,8 @@ export const WorkflowsSection: React.FC = () => {
 
             {/* Bottom Floating Pill Tag */}
             <div className="flex items-center justify-between text-xs text-slate-600 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/60">
-              <span className="font-medium font-hind">সরাসরি পাইকারি সরবরাহ</span>
-              <span className="font-bold text-blue-600 font-hind">৪৮ ঘণ্টায় ডেলিভারি</span>
+              <span className="font-medium">Direct Wholesale Sourcing</span>
+              <span className="font-bold text-blue-600">48-Hour Regional Delivery</span>
             </div>
           </motion.div>
         </motion.div>
@@ -161,8 +161,8 @@ export const WorkflowsSection: React.FC = () => {
                 <Play size={14} className="text-blue-600 fill-blue-600" />
                 <span className="text-xs font-bold text-slate-800">Masterclass: Candle &amp; Soap Craft</span>
               </div>
-              <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 font-hind">
-                ১০০% প্র্যাক্টিক্যাল
+              <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                100% Practical
               </span>
             </div>
 
@@ -175,16 +175,16 @@ export const WorkflowsSection: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent flex items-end p-4">
                 <div className="text-white space-y-1">
-                  <span className="text-xs font-bold block font-hind">পাঠ ০৩: সয় ওয়াক্স তাপমাত্রা ও সুগন্ধি ব্লেন্ডিং</span>
-                  <span className="text-[10px] text-sky-200 font-hind">বাংলা ভয়েসওভার + কিউরিং চার্ট ডাউনলোড</span>
+                  <span className="text-xs font-bold block">Lesson 03: Soy Wax Temperature &amp; Scent Blending</span>
+                  <span className="text-[10px] text-sky-200">Audio walkthrough + downloadable curing chart</span>
                 </div>
               </div>
             </div>
 
             {/* Bottom Status Bar */}
             <div className="flex items-center justify-between text-xs text-slate-600 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/60">
-              <span className="font-medium font-hind">আজীবন অ্যাক্সেস</span>
-              <span className="font-bold text-emerald-600 font-hind">পরিপূর্ণ ট্রেইনিং</span>
+              <span className="font-medium">Lifetime Video Access</span>
+              <span className="font-bold text-emerald-600">Zero Defect Batches</span>
             </div>
           </motion.div>
         </motion.div>
@@ -199,7 +199,7 @@ export const WorkflowsSection: React.FC = () => {
         >
           <div className="space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200/80 rounded-full text-xs font-bold text-emerald-700">
-              <span className="font-hind">যাচাইকৃত কাঁচামাল প্যাক</span>
+              <span>Verified Material Packs</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
               Manufacture 8X faster with{" "}
