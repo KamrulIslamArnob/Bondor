@@ -2,15 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { formatPrice } from "@/lib/price-utils";
-import { Trash2, ShoppingBag, Plus, Minus, ArrowLeft, ArrowRight, ShieldCheck, Tag, Package, BookOpen } from "lucide-react";
+import { Trash2, ShoppingBag, Plus, Minus, ArrowLeft, ArrowRight, ShieldCheck, Tag, Package, BookOpen, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart, cartTotal, cartCount } = useCart();
   const { user } = useAuth();
+  const router = useRouter();
 
   const [voucherCode, setVoucherCode] = useState<string>("");
   const [voucherDiscount, setVoucherDiscount] = useState<number>(0);
@@ -38,6 +40,10 @@ export default function CartPage() {
 
   const handleCheckout = async () => {
     if (cart.length === 0) return;
+    if (!user) {
+      router.push("/login?next=/cart");
+      return;
+    }
     setIsCheckingOut(true);
 
     try {
@@ -46,7 +52,7 @@ export default function CartPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: cart,
-          userId: user ? user.uid : "guest_user",
+          userId: user.uid,
           discount: voucherDiscount,
         }),
       });
@@ -266,6 +272,20 @@ export default function CartPage() {
                 </div>
               </div>
 
+              {/* Auth Gate for Checkout */}
+              {!user && (
+                <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2">
+                  <LogIn size={14} className="text-amber-600 mt-0.5 shrink-0" />
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold text-amber-900">Sign in required</p>
+                    <p className="text-xs text-amber-800 leading-relaxed">You must be signed in to checkout. Your cart will be saved.</p>
+                    <Link href="/login?next=/cart" className="inline-block mt-1">
+                      <Button variant="secondary" size="sm">Sign In to Checkout</Button>
+                    </Link>
+                  </div>
+                </div>
+              )}
+
               {/* Checkout Button */}
               <Button
                 variant="gradient"
@@ -274,8 +294,9 @@ export default function CartPage() {
                 isLoading={isCheckingOut}
                 onClick={handleCheckout}
                 rightIcon={<ArrowRight size={14} />}
+                disabled={!user}
               >
-                Proceed to Checkout
+                {user ? "Proceed to Checkout" : "Sign In to Checkout"}
               </Button>
 
               <div className="pt-2 flex items-center justify-center gap-1.5 text-xs text-slate-500 font-medium">

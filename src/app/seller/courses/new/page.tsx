@@ -12,7 +12,7 @@ import { ArrowLeft, Plus, Trash2, ArrowRight } from "lucide-react";
 
 export default function AddCoursePage() {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, userProfile, loading: authLoading } = useAuth();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,6 +20,11 @@ export default function AddCoursePage() {
   const [business, setBusiness] = useState<string>("tshirt");
   const [links, setLinks] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
+
+  React.useEffect(() => {
+    if (!authLoading && !user) router.push("/login");
+    if (!authLoading && userProfile && userProfile.role === "builder") router.push("/builder-dashboard");
+  }, [authLoading, user, userProfile, router]);
 
   const handleAddLink = () => {
     setLinks([...links, ""]);

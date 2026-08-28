@@ -15,7 +15,13 @@ export default function EditProductPage() {
   const params = useParams();
   const router = useRouter();
   const id = params.id as string;
-  const { user } = useAuth();
+  const { user, userProfile, loading: authLoading } = useAuth();
+
+  // Guard
+  React.useEffect(() => {
+    if (!authLoading && !user) router.push("/login");
+    if (!authLoading && userProfile && userProfile.role === "builder") router.push("/builder-dashboard");
+  }, [authLoading, user, userProfile, router]);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -28,12 +34,20 @@ export default function EditProductPage() {
 
   useEffect(() => {
     if (!id) return;
+    if (authLoading) return;
+    if (!user) return;
     const fetchProduct = async () => {
       setLoading(true);
       try {
         const snap = await getDoc(doc(db, "products", id));
         if (snap.exists()) {
-          const data = snap.data();
+          const data = snap.data() as any;
+          // Ownership check — only seller who owns product can edit
+          if (data.sellerId && data.sellerId !== user.uid) {
+            alert("You are not authorized to edit this listing.");
+            router.push("/seller-dashboard");
+            return;
+          }
           setName(data.name || "");
           setDescription(data.description || "");
           setPrice(data.price || 0);
@@ -51,7 +65,7 @@ export default function EditProductPage() {
       }
     };
     fetchProduct();
-  }, [id, router]);
+  }, [id, router, user, authLoading]);
 
   const handleAddImageUrl = () => {
     setImageUrls([...imageUrls, ""]);
