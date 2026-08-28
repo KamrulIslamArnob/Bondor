@@ -47,7 +47,7 @@ export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
       {/* Scenic Pastoral Hero Canvas with Digital Harbor Theme */}
       <div className="relative w-full min-h-[560px] sm:min-h-[640px] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs flex flex-col justify-center items-center text-center p-6 sm:p-12 md:p-16">
         {/* Pastoral Gradient Backdrop */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#8fd3f4]/35 via-[#d4fc79]/18 to-[#FAF8F5] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#8fd3f4]/35 via-[#d4fc79]/18 to-[#ffffff] pointer-events-none" />
         <div className="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400/20 via-emerald-300/15 to-transparent" />
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-white/50 blur-3xl rounded-full pointer-events-none" />
 

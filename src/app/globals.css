@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
+    --background: 0 0% 100%;
     --foreground: 224 71% 4%;
     --card: 0 0% 100%;
     --card-foreground: 224 71% 4%;
@@ -30,7 +30,7 @@
     --brand-blue-accent: #38BDF8;
     --brand-blue-light: #BAE6FD;
     --brand-blue-subtle: #F0F9FF;
-    --brand-cream: #FAF9F6;
+    --brand-cream: #ffffff;
     --brand-dark: #0F172A;
   }
 
@@ -39,7 +39,7 @@
   }
 
   body {
-    background-color: #F8FAFC;
+    background-color: #ffffff;
     color: #0F172A;
     font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;

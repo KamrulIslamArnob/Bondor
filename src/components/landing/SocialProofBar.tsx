@@ -13,7 +13,7 @@ export const SocialProofBar: React.FC = () => {
   ];
 
   return (
-    <div className="w-full py-8 border-y border-slate-200/80 bg-white/70 backdrop-blur-sm">
+    <div className="w-full py-8 border-y border-slate-100 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center space-y-4">
         <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
           The All-in-One Digital Harbor for Micro-Entrepreneurs in Bangladesh

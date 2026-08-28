@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${spaceMono.variable}`}>
-      <body className="bg-[#FAF8F5] text-zinc-950 min-h-screen antialiased font-sans selection:bg-[#62B6FC] selection:text-zinc-950">
+      <body className="bg-white text-slate-900 min-h-screen antialiased font-sans selection:bg-sky-500 selection:text-white">
         <AuthProvider>
           <CartProvider>
             <AppLayoutWrapper>{children}</AppLayoutWrapper>
