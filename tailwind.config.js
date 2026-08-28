@@ -10,6 +10,8 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-outfit)", "system-ui", "-apple-system", "sans-serif"],
         heading: ["var(--font-outfit)", "system-ui", "-apple-system", "sans-serif"],
+        bengali: ["var(--font-hind-siliguri)", "system-ui", "sans-serif"],
+        hind: ["var(--font-hind-siliguri)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "SF Mono", "Menlo", "monospace"],
       },
       colors: {
