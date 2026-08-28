@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
-import { ShoppingBag, LogOut, Plus, BookOpen, Package, Compass, LayoutDashboard, Anchor } from "lucide-react";
+import { ShoppingBag, LogOut, Plus, BookOpen, Package, Compass, LayoutDashboard, Anchor, Store } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export const Navbar: React.FC = () => {
@@ -119,6 +119,15 @@ export const Navbar: React.FC = () => {
                       <span className="hidden sm:inline">Docks</span>
                     </Button>
                   </Link>
+                  <Link href="/my-store">
+                    <Button
+                      variant={pathname === "/my-store" ? "default" : "ghost"}
+                      size="sm"
+                      leftIcon={<Store size={14} />}
+                    >
+                      <span className="hidden sm:inline">My Store</span>
+                    </Button>
+                  </Link>
                   <Link href="/my-courses">
                     <Button
                       variant={pathname === "/my-courses" ? "default" : "ghost"}
@@ -156,6 +165,15 @@ export const Navbar: React.FC = () => {
                       leftIcon={<LayoutDashboard size={14} />}
                     >
                       <span className="hidden sm:inline">Dashboard</span>
+                    </Button>
+                  </Link>
+                  <Link href="/my-store">
+                    <Button
+                      variant={pathname === "/my-store" ? "default" : "ghost"}
+                      size="sm"
+                      leftIcon={<Store size={14} />}
+                    >
+                      <span className="hidden sm:inline">My Store</span>
                     </Button>
                   </Link>
                   <Link href="/seller/products/new">

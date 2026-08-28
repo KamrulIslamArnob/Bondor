@@ -69,6 +69,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
       badge: "4 Active",
     },
     {
+      label: "My Storefront",
+      href: "/my-store",
+      icon: <Store size={16} />,
+      badge: "Shopify",
+    },
+    {
       label: "Video Academy",
       href: "/courses",
       icon: <GraduationCap size={16} />,
@@ -96,6 +102,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
       label: "Seller Dashboard",
       href: "/seller-dashboard",
       icon: <BarChart3 size={16} />,
+    },
+    {
+      label: "My Storefront",
+      href: "/my-store",
+      icon: <Store size={16} />,
+      badge: "Live",
     },
     {
       label: "List Material Pack",

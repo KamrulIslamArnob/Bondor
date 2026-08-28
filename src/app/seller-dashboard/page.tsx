@@ -193,6 +193,40 @@ export default function SellerDashboard() {
         activeCoursesCount={courses.length}
       />
 
+      {/* Live Storefront Spotlight Banner */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-3xl p-6 sm:p-7 shadow-xs border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-2 max-w-xl">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
+              Micro-Storefront Feature (Shopify Mode)
+            </span>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            Launch &amp; Manage Your Own Brand Website
+          </h2>
+          <p className="text-xs text-slate-300 leading-relaxed font-normal">
+            Create your unique public store at <code className="text-sky-300 font-mono">/store/[your-brand]</code>, customize banners and themes, and process direct orders with Cash on Delivery and bKash.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 shrink-0">
+          <Link href="/my-store">
+            <Button variant="default" size="md" className="bg-sky-500 hover:bg-sky-400 text-white font-bold">
+              Manage My Storefront
+            </Button>
+          </Link>
+          <a
+            href="/store/demo-crafts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold border border-white/15 transition-colors"
+          >
+            Preview Demo Store
+          </a>
+        </div>
+      </div>
+
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Trending Docks Radar & Quick Shortcuts */}
