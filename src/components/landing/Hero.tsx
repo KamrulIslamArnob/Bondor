@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { ArrowRight, Hammer, Store, Sparkles, Anchor, Search } from "lucide-react";
+import { ArrowRight, Hammer, Store, Search, Sparkles, Anchor, CheckCircle2, ShieldCheck } from "lucide-react";
+import Link from "next/link";
 
 export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
   const router = useRouter();
@@ -37,145 +38,158 @@ export const Hero: React.FC<{ initialMode?: "login" | "signup" }> = () => {
     }
   };
 
-  const handleQuickChip = (categoryKey: string) => {
-    setSelectedCategory(categoryKey);
-    router.push(`/courses?business=${categoryKey}`);
-  };
-
   return (
-    <div className="w-full">
-      {/* Scenic Pastoral Hero Canvas with Digital Harbor Theme */}
-      <div className="relative w-full min-h-[560px] sm:min-h-[640px] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs flex flex-col justify-center items-center text-center p-6 sm:p-12 md:p-16">
-        {/* Pastoral Gradient Backdrop */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#8fd3f4]/35 via-[#d4fc79]/18 to-[#ffffff] pointer-events-none" />
-        <div className="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400/20 via-emerald-300/15 to-transparent" />
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-3/4 h-80 bg-white/50 blur-3xl rounded-full pointer-events-none" />
+    <div className="w-full space-y-6">
+      {/* Dynamic Angled Split Hero Banner Matching Reference Image */}
+      <div className="relative w-full min-h-[520px] md:min-h-[580px] rounded-3xl overflow-hidden shadow-card border border-slate-200/80 bg-slate-950">
+        {/* Right Side Background Image (Modern Cityscape & Dynamic Billboard Scene) */}
+        <div className="absolute inset-0 w-full h-full">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85"
+            alt="Modern commerce harbor and cityscape"
+            className="w-full h-full object-cover object-right md:object-center"
+          />
+          {/* Subtle dark tint over image */}
+          <div className="absolute inset-0 bg-slate-950/25 pointer-events-none" />
+        </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-6 sm:space-y-8 flex flex-col items-center">
-          {/* Top Pill Badge with Bengali Name */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/90 backdrop-blur-md text-slate-800 border border-slate-200/90 rounded-full text-xs font-semibold shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-slate-700 font-serif font-bold">Bondor (বন্দর)</span>
-            <span className="text-slate-400">·</span>
-            <span className="text-slate-600 font-medium">Digital Harbor for Micro-Entrepreneurs in Bangladesh</span>
-          </div>
+        {/* Right Billboard Graphic Overlay (Matching the GoodData / Visa / Nasdaq Curved Billboard) */}
+        <div className="hidden lg:block absolute right-8 top-12 bottom-12 w-[340px] rounded-2xl bg-gradient-to-b from-sky-950/85 via-blue-950/80 to-slate-950/90 backdrop-blur-md border border-white/20 p-6 text-white shadow-2xl flex flex-col justify-between">
+          <div className="space-y-4">
+            <div className="text-[11px] font-bold tracking-widest text-sky-400 uppercase">
+              BONDOR · DIGITAL HARBOR
+            </div>
+            <div className="text-xl font-extrabold tracking-tight text-white leading-snug font-serif">
+              EMPOWERING 10,000+ MICRO-MAKERS
+            </div>
 
-          {/* Editorial Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-slate-900 tracking-tight leading-[1.12] text-balance">
-            Where Aspiring Entrepreneurs
-            <br />
-            Learn the Craft &amp; Source the Materials
-          </h1>
-
-          {/* Subtitle based on Project Intro */}
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed text-pretty font-normal">
-            Bondor combines <strong>business education</strong> and <strong>wholesale starter packs</strong> in a single platform. Choose your business dock, master the manufacturing process, and order certified supplies with secure Stripe checkout.
-          </p>
-
-          {/* Fast Entry Buttons for Builders and Sellers */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => handleQuickEnter("builder")}
-              disabled={isAuthenticating}
-              className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 active:scale-[0.96] text-white rounded-full text-xs sm:text-sm font-semibold transition-[transform,background-color] shadow-xs flex items-center gap-2 cursor-pointer"
-            >
-              <Hammer size={15} className="text-sky-400" />
-              <span>Enter as Builder (Entrepreneur)</span>
-              <ArrowRight size={14} />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickEnter("seller")}
-              disabled={isAuthenticating}
-              className="px-5 py-2.5 bg-white hover:bg-slate-50 active:scale-[0.96] text-slate-900 border border-slate-300 hover:border-slate-400 rounded-full text-xs sm:text-sm font-semibold transition-[transform,background-color] shadow-xs flex items-center gap-2 cursor-pointer"
-            >
-              <Store size={15} className="text-amber-600" />
-              <span>Enter as Seller (Wholesale Supplier)</span>
-            </button>
-          </div>
-
-          {/* Central Interactive Search / Prompt Box Floating Card */}
-          <div className="w-full max-w-2xl bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-card text-left space-y-3 mt-2">
-            <form onSubmit={handleSearchSubmit} className="space-y-3">
-              <div className="relative">
-                <textarea
-                  rows={2}
-                  placeholder="Ask anything about starting a T-shirt, candle, perfume, or soap business in Bangladesh..."
-                  aria-label="Search business dock categories, video masterclasses, or wholesale starter packs"
-                  value={promptQuery}
-                  onChange={(e) => setPromptQuery(e.target.value)}
-                  className="w-full p-2.5 bg-slate-50/70 hover:bg-slate-50 focus:bg-white border border-slate-200/80 rounded-xl text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all resize-none font-medium"
-                />
+            <div className="pt-2 space-y-2 text-xs text-slate-300">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={13} className="text-emerald-400" />
+                <span>Verified Raw Material Packs</span>
               </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={13} className="text-emerald-400" />
+                <span>Modular Video Masterclasses</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={13} className="text-emerald-400" />
+                <span>Stripe Encrypted Payment</span>
+              </div>
+            </div>
+          </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-t border-slate-100">
-                {/* Category Dropdown Filter based on Specification */}
-                <div className="flex items-center gap-2">
-                  <select
-                    value={selectedCategory}
-                    aria-label="Select business category"
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 rounded-lg px-2.5 py-1.5 outline-none cursor-pointer transition-colors"
-                  >
-                    <option value="all">All Business Categories</option>
-                    <option value="tshirt">👕 T-Shirt Screenprinting</option>
-                    <option value="candle">🕯️ Scented Candle Making</option>
-                    <option value="soap">🧼 Handmade Soap &amp; Cosmetics</option>
-                    <option value="mug">☕ Mug Sublimation &amp; Merch</option>
-                  </select>
+          <div className="pt-6 border-t border-white/15 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-sky-500 text-white flex items-center justify-center font-bold text-sm shadow-xs">
+                <Anchor size={16} />
+              </div>
+              <div>
+                <span className="font-bold text-sm block">Bondor (বন্দর)</span>
+                <span className="text-[10px] text-sky-300">Bangladesh Maker Hub</span>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30">
+              Live 2026
+            </span>
+          </div>
+        </div>
 
-                  <span className="text-[11px] text-slate-400 hidden sm:inline">
-                    Courses &amp; Material Packs
-                  </span>
-                </div>
+        {/* Left Side Angled Royal Blue Gradient Overlay */}
+        <div
+          className="absolute inset-y-0 left-0 w-full lg:w-[68%] bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600/95 lg:[clip-path:polygon(0_0,100%_0,84%_100%,0%_100%)] p-6 sm:p-12 md:p-16 flex flex-col justify-center text-left text-white z-10"
+        >
+          <div className="max-w-xl space-y-6">
+            {/* Top Pill Tag */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/15 backdrop-blur-md rounded-full text-xs font-semibold text-white border border-white/20 w-fit">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Bondor (বন্দর) · Digital Harbor for Bangladesh</span>
+            </div>
 
-                {/* Submit Action Button */}
+            {/* High-Impact Headline matching reference */}
+            <div className="space-y-1">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] text-white">
+                Manufacturing everywhere.
+                <br />
+                For everyone.
+              </h1>
+            </div>
+
+            {/* Subtitle */}
+            <p className="text-sm sm:text-base text-sky-100 leading-relaxed max-w-lg font-normal text-pretty">
+              The digital harbor empowering micro-entrepreneurs across Bangladesh with hands-on business masterclasses and wholesale raw material packs. More cost-efficient, fully accessible, easily scalable.
+            </p>
+
+            {/* Action Buttons matching the reference layout */}
+            <div className="space-y-2 pt-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
-                  type="submit"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-sky-600 hover:bg-sky-700 active:scale-[0.96] text-white rounded-xl text-xs font-semibold transition-[transform,background-color] shadow-xs cursor-pointer"
+                  type="button"
+                  onClick={() => handleQuickEnter("builder")}
+                  disabled={isAuthenticating}
+                  className="px-6 py-3 bg-white hover:bg-slate-100 active:scale-[0.96] text-slate-900 font-bold rounded-lg text-xs sm:text-sm transition-all shadow-md flex items-center gap-2 cursor-pointer"
                 >
-                  <Search size={13} />
-                  <span>Explore Catalog</span>
+                  <Hammer size={15} className="text-blue-600" />
+                  <span>Get started as Builder</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleQuickEnter("seller")}
+                  disabled={isAuthenticating}
+                  className="px-6 py-3 bg-white/15 hover:bg-white/25 active:scale-[0.96] text-white border border-white/80 rounded-lg text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer backdrop-blur-md"
+                >
+                  <Store size={15} className="text-sky-300" />
+                  <span>Enter as Seller</span>
                 </button>
               </div>
-            </form>
 
-            {/* Quick Keyword Suggestion Chips */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[11px]">
-              <span className="text-slate-400 font-medium mr-1">Popular Docks:</span>
-              <button
-                type="button"
-                onClick={() => handleQuickChip("tshirt")}
-                className="px-2.5 py-0.5 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200/80 rounded-full transition-colors font-medium"
-              >
-                T-Shirt Printing
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickChip("candle")}
-                className="px-2.5 py-0.5 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200/80 rounded-full transition-colors font-medium"
-              >
-                Candle Making
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickChip("soap")}
-                className="px-2.5 py-0.5 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200/80 rounded-full transition-colors font-medium"
-              >
-                Soap Craft
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickChip("mug")}
-                className="px-2.5 py-0.5 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-700 border border-slate-200/80 rounded-full transition-colors font-medium"
-              >
-                Mug Sublimation
-              </button>
+              <p className="text-[11px] text-sky-200/90 pl-1 font-medium">
+                Instant 1-Click Access · Verified Suppliers &amp; Video Courses
+              </p>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Floating Category Quick Search Bar */}
+      <div className="w-full bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+        <form onSubmit={handleSearchSubmit} className="flex-1 w-full flex flex-col sm:flex-row items-center gap-3">
+          <div className="relative flex-1 w-full">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search T-shirt blanks, soy wax, candle jars, soap oils, or masterclasses..."
+              aria-label="Search courses and materials"
+              value={promptQuery}
+              onChange={(e) => setPromptQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-sky-500 transition-all font-medium"
+            />
+          </div>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <select
+              value={selectedCategory}
+              aria-label="Select dock category"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 outline-none cursor-pointer hover:bg-slate-100 transition-colors"
+            >
+              <option value="all">All Business Categories</option>
+              <option value="tshirt">👕 T-Shirt Screenprinting</option>
+              <option value="candle">🕯️ Scented Candle Making</option>
+              <option value="soap">🧼 Handmade Soap Craft</option>
+              <option value="mug">☕ Mug Sublimation Merch</option>
+            </select>
+
+            <button
+              type="submit"
+              className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Explore</span>
+              <ArrowRight size={13} />
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
