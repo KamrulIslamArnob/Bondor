@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="bn" className={`${outfit.variable} ${spaceMono.variable} ${hindSiliguri.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${spaceMono.variable} ${hindSiliguri.variable}`}>
       <body className="bg-white text-slate-900 min-h-screen antialiased font-sans selection:bg-blue-600 selection:text-white">
         <AuthProvider>
           <CartProvider>

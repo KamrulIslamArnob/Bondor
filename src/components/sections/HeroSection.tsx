@@ -17,7 +17,6 @@ export const HeroSection: React.FC = () => {
   const router = useRouter();
 
   const handleQuickStart = (role: "builder" | "seller") => {
-    // Proper auth: redirect to signup with role hint — no local mock bypass
     router.push(`/signup?role=${role}`);
   };
 
@@ -73,10 +72,10 @@ export const HeroSection: React.FC = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="max-w-4xl mx-auto space-y-4 px-4"
       >
-        {/* Brand Harbor Pill */}
+        {/* Brand Harbor Pill (Eyebrow 1 of 4) */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50/90 border border-blue-200/80 rounded-full text-xs font-semibold text-blue-900 shadow-xs mb-2">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-bold text-blue-700">Bondor <span className="font-hind">(বন্দর)</span></span>
+          <span className="font-bold text-blue-700">Bondor <span lang="bn" className="font-hind">(বন্দর)</span></span>
           <span className="text-blue-300">·</span>
           <span className="text-slate-700">Digital Harbor for Micro-Entrepreneurs in Bangladesh</span>
         </div>
@@ -89,7 +88,7 @@ export const HeroSection: React.FC = () => {
         </h1>
 
         <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
-          Automate and collaborate on your business education and wholesale sourcing. Accelerate local business growth and create meaningful maker experiences in Bangladesh.
+          Source verified materials, learn hands-on production skills, and scale your micro-manufacturing business across Bangladesh.
         </p>
       </motion.div>
 
@@ -118,17 +117,17 @@ export const HeroSection: React.FC = () => {
                       {cat.icon}
                     </div>
                     {cat.badge && (
-                      <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+                      <span className="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
                         {cat.badge}
                       </span>
                     )}
                   </div>
 
                   <div>
-                    <h3 className="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600 transition-colors">
                       {cat.title}
                     </h3>
-                    <p className="text-[11px] text-slate-500 leading-relaxed mt-1 font-normal line-clamp-2">
+                    <p className="text-xs text-slate-500 leading-relaxed mt-1 font-normal line-clamp-2">
                       {cat.desc}
                     </p>
                   </div>
@@ -139,7 +138,7 @@ export const HeroSection: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Primary Actions & Sub-captions */}
+      {/* Primary Actions */}
       <motion.div 
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}

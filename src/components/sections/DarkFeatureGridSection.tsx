@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Settings, Bell, Code2, ShieldCheck, Box, Layers, ArrowRight } from "lucide-react";
+import { Settings, Bell, Code2, ArrowRight } from "lucide-react";
 
 export const DarkFeatureGridSection: React.FC = () => {
   const features = [
@@ -19,8 +19,8 @@ export const DarkFeatureGridSection: React.FC = () => {
     },
     {
       icon: <Code2 size={22} className="text-purple-400" />,
-      title: "Stripe Escrow Architecture",
-      desc: "Complete purchases securely with Stripe payment gateway. Funds are safeguarded until shipment is verified.",
+      title: "Secure Escrow Architecture",
+      desc: "Complete purchases with secure payment infrastructure. Funds are safeguarded until order fulfillment is verified.",
     },
   ];
 
@@ -38,14 +38,15 @@ export const DarkFeatureGridSection: React.FC = () => {
 
         {/* Header */}
         <div className="relative z-10 max-w-2xl mx-auto space-y-3">
+          {/* Eyebrow 2 of 4 */}
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-950/80 border border-blue-500/30 rounded-full text-xs font-bold text-blue-300">
-            <span>Industrial-Grade Wholesale Platform</span>
+            <span>Wholesale Supply Network</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
             Scale production with an industry-grade supply network
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
-            Bondor wholesale supply infrastructure is supported by clear batch specifications and verified vendors for faster, risk-free manufacturing.
+            Bondor wholesale supply infrastructure is supported by clear batch specifications and verified vendors for reliable manufacturing.
           </p>
         </div>
 
@@ -62,7 +63,7 @@ export const DarkFeatureGridSection: React.FC = () => {
                 {f.icon}
               </div>
               <div className="space-y-1.5">
-                <h3 className="text-base sm:text-lg font-bold text-white font-serif">
+                <h3 className="text-base sm:text-lg font-bold text-white">
                   {f.title}
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed font-normal pt-1">

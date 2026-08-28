@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Case Studies Card on Left (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider font-serif">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Maker Spotlight
             </h4>
 
@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <div>
-                <span className="text-[11px] font-bold text-blue-400 block font-serif">
+                <span className="text-xs font-bold text-blue-400 block">
                   Dhaka Streetwear Co.
                 </span>
                 <p className="text-xs text-slate-300 leading-relaxed font-normal mt-1">

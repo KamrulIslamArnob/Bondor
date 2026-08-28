@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, ShieldCheck, HeartHandshake } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export const SupportTeamSection: React.FC = () => {
   return (
@@ -26,10 +26,10 @@ export const SupportTeamSection: React.FC = () => {
               <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
                 ★
               </div>
-              <span className="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums font-serif">
+              <span className="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums">
                 9.8
               </span>
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
                 MAKER SATISFACTION
               </span>
             </motion.div>
@@ -67,15 +67,12 @@ export const SupportTeamSection: React.FC = () => {
           className="lg:col-span-6 space-y-6"
         >
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200/80 rounded-full text-xs font-bold text-blue-700">
-              <span>24/7 Workshop Guidance</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
-              Best-in-class guidance{" "}
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
+              Practical guidance{" "}
               <span className="text-blue-600">and workshop support</span>
             </h2>
-            <p className="text-sm text-slate-600 leading-relaxed font-normal">
-              Our makers agree: 98% consider us an essential digital harbor in their production journey. We are rated highest for reliable wholesale sourcing and practical Bangla masterclass clarity.
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              Makers rate Bondor highest for verified wholesale sourcing, structured unit economics calculations, and step-by-step Bangla video instruction.
             </p>
           </div>
 

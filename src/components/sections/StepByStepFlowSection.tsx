@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, ChevronRight, Package, BookOpen, Calculator, ShieldCheck, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,26 +12,26 @@ export const StepByStepFlowSection: React.FC = () => {
     {
       number: "1",
       title: "Connect with verified suppliers",
-      desc: "Select your business dock (T-shirts, candles, soaps, or mugs) and source certified raw material starter packs without middlemen.",
+      desc: "Select your craft dock (T-shirts, candles, soaps, or mugs) and source certified raw material starter packs directly.",
     },
     {
       number: "2",
-      title: "Automate batch calculations",
-      desc: "Use our live batch unit economics calculator to determine exact production costs, packaging overhead, and profit margins.",
+      title: "Calculate batch unit economics",
+      desc: "Use our live batch calculator to determine exact production costs, packaging overhead, and profit margins.",
     },
     {
       number: "3",
       title: "Master the craft with video courses",
-      desc: "Follow modular video masterclasses taught in Bangla by practicing Bangladeshi makers, with step-by-step ratio guidance.",
+      desc: "Follow modular video masterclasses taught in Bangla by practicing Bangladeshi makers, with step-by-step guidance.",
     },
     {
       number: "4",
-      title: "Review, test, and launch",
-      desc: "Conduct small test runs with starter bundles, inspect finish quality, and prepare product batches for retail.",
+      title: "Test batches and launch",
+      desc: "Conduct small test runs with starter bundles, inspect finish quality, and prepare product batches for market.",
     },
     {
       number: "5",
-      title: "Analyze production ROI",
+      title: "Scale production volume",
       desc: "Track completed units, monitor raw inventory replenishment timelines, and scale up batch sizes seamlessly.",
     },
   ];
@@ -44,16 +44,17 @@ export const StepByStepFlowSection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center max-w-2xl mx-auto space-y-2"
+        className="text-center max-w-2xl mx-auto space-y-3"
       >
+        {/* Eyebrow 3 of 4 */}
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200/80 rounded-full text-xs font-bold text-blue-700">
           <span>End-to-End Execution Flow</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight text-balance font-serif">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
           The production workflow for{" "}
           <span className="text-blue-600">successful</span> product launches
         </h2>
-        <p className="text-sm text-slate-600 font-normal">
+        <p className="text-sm sm:text-base text-slate-600 font-normal">
           From first craft exploration to repeat wholesale batch manufacturing.
         </p>
       </motion.div>
@@ -86,11 +87,11 @@ export const StepByStepFlowSection: React.FC = () => {
                     {s.number}
                   </div>
                   <div className="space-y-1 min-w-0">
-                    <h3 className={`text-sm sm:text-base font-bold ${isActive ? "text-slate-900 font-serif" : "text-slate-700"}`}>
+                    <h3 className={`text-sm sm:text-base font-bold ${isActive ? "text-slate-900" : "text-slate-700"}`}>
                       {s.title}
                     </h3>
                     {isActive && (
-                      <p className="text-xs text-slate-600 leading-relaxed font-normal animate-in fade-in duration-200 pt-1">
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal animate-in fade-in duration-200 pt-1">
                         {s.desc}
                       </p>
                     )}
@@ -120,17 +121,17 @@ export const StepByStepFlowSection: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-blue-400">STAGE {steps[activeStep].number} OF 5</span>
                 </div>
-                <span className="text-[10px] font-semibold text-emerald-300 bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                <span className="text-xs font-semibold text-emerald-300 bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
                   Active Stage
                 </span>
               </div>
 
               {/* Step Content Visual */}
               <div className="relative z-10 space-y-3 my-auto">
-                <h4 className="text-xl font-bold text-white font-serif">
+                <h4 className="text-xl font-bold text-white">
                   {steps[activeStep].title}
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                   {steps[activeStep].desc}
                 </p>
 
@@ -149,7 +150,7 @@ export const StepByStepFlowSection: React.FC = () => {
                   <span>Launch in Dashboard</span>
                   <ArrowRight size={13} />
                 </Link>
-                <span className="text-[10px] text-slate-400">Step {activeStep + 1} Selected</span>
+                <span className="text-xs text-slate-400">Step {activeStep + 1} Selected</span>
               </div>
             </motion.div>
           </AnimatePresence>

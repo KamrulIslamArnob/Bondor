@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="text-sm font-bold text-slate-900 tracking-tight font-serif">
+              <span className="text-sm font-bold text-slate-900 tracking-tight">
                 Bondor
               </span>
               <span className="text-[10px] font-semibold text-sky-700 bg-sky-50 px-1.5 py-0.2 rounded-full border border-sky-200/80">
@@ -185,7 +185,7 @@ export const Navbar: React.FC = () => {
                   variant="ghost"
                   size="icon"
                   onClick={handleLogout}
-                  title="Disconnect Session"
+                  title="Sign out"
                   className="text-slate-400 hover:text-rose-600"
                 >
                   <LogOut size={15} />

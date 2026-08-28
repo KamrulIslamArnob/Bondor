@@ -29,7 +29,7 @@ export const LogoCloudSection: React.FC = () => {
               <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
                 {brand.icon}
               </div>
-              <span className="text-xs sm:text-sm font-bold tracking-tight font-serif">
+              <span className="text-xs sm:text-sm font-bold tracking-tight">
                 {brand.name}
               </span>
             </div>

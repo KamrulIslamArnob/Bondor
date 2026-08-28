@@ -11,6 +11,13 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Storefronts are standalone full-page branded sites
+  const isStorefrontPage = pathname.startsWith("/store");
+
+  if (isStorefrontPage) {
+    return <div className="min-h-screen bg-white">{children}</div>;
+  }
+
   // Marketing, auth, and static legal pages use top-navbar + footer layout
   const isMarketingPage = pathname === "/" || pathname === "/login" || pathname === "/signup";
 

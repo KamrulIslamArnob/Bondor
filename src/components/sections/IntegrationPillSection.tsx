@@ -17,7 +17,7 @@ export const IntegrationPillSection: React.FC = () => {
   return (
     <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8">
       <div className="bg-gradient-to-r from-emerald-50 via-teal-50 to-sky-50 border border-emerald-200/70 rounded-3xl p-8 text-center space-y-6 shadow-xs">
-        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-serif">
+        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
           Everything in sync in one place
         </h3>
 

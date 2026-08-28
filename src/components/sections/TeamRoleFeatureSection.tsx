@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Hammer, Store, Sparkles, Layers, ArrowRight, CheckCircle2, Box, BookOpen } from "lucide-react";
+import { Layers, ArrowRight, Box, BookOpen } from "lucide-react";
 
 export const TeamRoleFeatureSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -26,11 +26,8 @@ export const TeamRoleFeatureSection: React.FC = () => {
       >
         {/* Title */}
         <div className="space-y-3 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs font-bold text-sky-300">
-            <span>Role-Based Workspace Architecture</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif">
-            A feature set for everyone in your workshop
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            A workspace tailored for your production role
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 font-normal">
             Whether you are learning your first craft or supplying wholesale inventory at scale.
@@ -64,11 +61,11 @@ export const TeamRoleFeatureSection: React.FC = () => {
             className="bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 rounded-2xl p-6 transition-colors duration-200 space-y-5 flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <h3 className="text-base font-bold text-white font-serif">
+              <h3 className="text-base font-bold text-white">
                 Screenprint &amp; Apparel Lab
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                Loop tested ink formulas and mesh calibration into your production workflow for seamless apparel runs.
+                Calibrate inks and screen mesh to ensure consistent results across every print run.
               </p>
             </div>
 
@@ -78,7 +75,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
                 <Layers size={15} className="text-blue-400" />
                 <span className="font-bold">Emulsion Calibration</span>
               </div>
-              <span className="text-[10px] text-emerald-400 font-bold">180 GSM Ready</span>
+              <span className="text-xs text-emerald-400 font-bold">180 GSM Ready</span>
             </div>
           </motion.div>
 
@@ -88,11 +85,11 @@ export const TeamRoleFeatureSection: React.FC = () => {
             className="bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 rounded-2xl p-6 transition-colors duration-200 space-y-5 flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <h3 className="text-base font-bold text-white font-serif">
+              <h3 className="text-base font-bold text-white">
                 Starter Packs &amp; Raw Supplies
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                Order pre-calibrated material bundles without paying retail middlemen markups or dealing with unverified quality.
+                Order pre-calibrated material bundles directly from certified regional suppliers.
               </p>
             </div>
 
@@ -102,7 +99,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
                 <Box size={15} className="text-amber-400" />
                 <span className="font-bold">Soy Wax &amp; Wicks Kit</span>
               </div>
-              <span className="text-[10px] text-amber-300 font-bold">1kg Pack</span>
+              <span className="text-xs text-amber-300 font-bold">1kg Pack</span>
             </div>
           </motion.div>
 
@@ -112,11 +109,11 @@ export const TeamRoleFeatureSection: React.FC = () => {
             className="bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 rounded-2xl p-6 transition-colors duration-200 space-y-5 flex flex-col justify-between"
           >
             <div className="space-y-2">
-              <h3 className="text-base font-bold text-white font-serif">
+              <h3 className="text-base font-bold text-white">
                 Vendor &amp; Academy Hub
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                Manage product listings, monitor batch orders, and publish comprehensive video masterclasses from one dashboard.
+                Manage material listings, monitor batch orders, and publish step-by-step masterclasses.
               </p>
             </div>
 
@@ -126,7 +123,7 @@ export const TeamRoleFeatureSection: React.FC = () => {
                 <BookOpen size={15} className="text-purple-400" />
                 <span className="font-bold">Course Marketplace</span>
               </div>
-              <span className="text-[10px] text-purple-300 font-bold">Live Portal</span>
+              <span className="text-xs text-purple-300 font-bold">Live Portal</span>
             </div>
           </motion.div>
         </div>

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRight, Zap, Clock } from "lucide-react";
 
 export const SpotlightCaseStudySection: React.FC = () => {
   return (
@@ -15,15 +15,11 @@ export const SpotlightCaseStudySection: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="bg-gradient-to-br from-blue-50/90 via-sky-50/70 to-indigo-50/60 border border-blue-200/80 rounded-3xl p-8 sm:p-12 shadow-xs grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
       >
-        {/* Left Side: Headline & Metric Callout Pills (7 cols) */}
+        {/* Left Side: Headline & Metric Callout Pills (6 cols) */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-blue-200 rounded-full text-xs font-bold text-blue-700 shadow-xs">
-            <span>Maker Spotlight</span>
-          </div>
-
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug font-serif">
-            Dhaka Streetwear Co. increases the{" "}
-            <span className="text-blue-600">speed</span> of rolling out new product lines
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+            Dhaka Streetwear Co. speeds up{" "}
+            <span className="text-blue-600">new product launches</span>
           </h3>
 
           <div className="space-y-3">
@@ -51,20 +47,20 @@ export const SpotlightCaseStudySection: React.FC = () => {
               href="/courses?business=tshirt"
               className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
             >
-              <span>Read maker story</span>
+              <span>Read the full story</span>
               <ArrowRight size={14} />
             </Link>
           </div>
         </div>
 
-        {/* Right Side: Quote & Maker Avatar (5 cols) */}
+        {/* Right Side: Quote & Maker Avatar (6 cols) */}
         <motion.div 
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           className="lg:col-span-6 bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-blue-200/80 shadow-card flex flex-col justify-between space-y-6"
         >
           <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal italic">
-            "With Bondor's verified supply packs, I eliminated supply headaches and material inconsistency. We went from guessing chemical ratios to scaling production to 500 orders/month."
+            &ldquo;With Bondor&rsquo;s verified supply packs, I eliminated supply headaches and material inconsistency. We went from guessing chemical ratios to scaling production to 500 orders per month.&rdquo;
           </p>
 
           <div className="flex items-center justify-between border-t border-slate-100 pt-4">
@@ -76,15 +72,15 @@ export const SpotlightCaseStudySection: React.FC = () => {
               />
               <div>
                 <h4 className="text-xs font-bold text-slate-900">Tariqul Islam</h4>
-                <p className="text-[11px] text-slate-500">Founder · Dhaka Streetwear Co.</p>
+                <p className="text-xs text-slate-500">Founder · Dhaka Streetwear Co.</p>
               </div>
             </div>
 
             <div className="text-right">
-              <span className="text-xs font-extrabold tracking-tight text-blue-600 font-serif block">
+              <span className="text-xs font-extrabold tracking-tight text-blue-600 block">
                 DHAKA STREETWEAR
               </span>
-              <span className="text-[10px] text-slate-400 font-medium">Verified Maker</span>
+              <span className="text-[11px] text-slate-400 font-medium">Verified Maker</span>
             </div>
           </div>
         </motion.div>
