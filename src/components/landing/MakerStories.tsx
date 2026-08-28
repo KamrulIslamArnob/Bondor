@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Layers, Flame, Box } from "lucide-react";
+import { ArrowRight, Sparkles, Layers, Flame } from "lucide-react";
 
 export const MakerStories: React.FC = () => {
   const stories = [
@@ -11,11 +11,11 @@ export const MakerStories: React.FC = () => {
       category: "T-Shirt Screenprinting",
       name: "Tariqul Islam",
       role: "Builder · Dhaka Streetwear Co.",
-      story: "Enrolled in the screen preparation masterclass and sourced 50 cotton blanks directly from a verified supplier. Reached break-even in my second week.",
+      story: "Enrolled in the screen preparation masterclass and sourced 50 combed cotton blanks directly from a verified supplier. Reached break-even in my second week.",
       tag: "500 Shirts/Month",
-      color: "from-sky-950/90 via-slate-900/70 to-transparent",
+      color: "from-slate-950/95 via-slate-900/60 to-transparent",
       icon: <Layers size={14} aria-hidden="true" />,
-      bgImage: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80",
+      bgImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=85",
     },
     {
       id: "candle",
@@ -24,26 +24,26 @@ export const MakerStories: React.FC = () => {
       role: "Builder · Luminate Studio Sylhet",
       story: "Started with a ৳3,200 soy wax starter pack and mastered wick sizing through the video courses. Now stocked in 14 local lifestyle boutiques.",
       tag: "14 Boutiques",
-      color: "from-amber-950/90 via-slate-900/70 to-transparent",
+      color: "from-amber-950/95 via-slate-900/60 to-transparent",
       icon: <Flame size={14} aria-hidden="true" />,
-      bgImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      bgImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=85",
     },
     {
       id: "soap",
       category: "Handmade Soap & Cosmetics",
       name: "Zubair Ahmed",
-      role: "Builder · PureBotanic BD",
+      role: "Builder · PureBotanic BD, Chittagong",
       story: "Learned cold-process saponification and ordered certified botanical oils and caustic soda in calibrated batch ratios with secure Stripe payment.",
       tag: "Zero Defect Batches",
-      color: "from-emerald-950/90 via-slate-900/70 to-transparent",
+      color: "from-emerald-950/95 via-slate-900/60 to-transparent",
       icon: <Sparkles size={14} aria-hidden="true" />,
-      bgImage: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+      bgImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85",
     },
   ];
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 space-y-12">
-      {/* Section Header based on User Roles & Responsibilities */}
+      {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3 max-w-xl">
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-700 bg-sky-50 px-3 py-1 rounded-full border border-sky-200/80">

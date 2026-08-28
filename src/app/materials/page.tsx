@@ -27,6 +27,53 @@ function MaterialsContent() {
     }
   }, [businessParam]);
 
+  const DEFAULT_PRODUCTS: Product[] = [
+    {
+      id: "prod_tshirt_01",
+      name: "Screenprint Starter Pack (20 Cotton Blanks + 1kg Plastisol Ink)",
+      description: "20 premium combed cotton blanks (180 GSM), 1kg eco-plastisol ink, 110-mesh wooden screen frame, squeegee, and emulsion kit.",
+      category: "tshirt",
+      price: 4500,
+      stock: 45,
+      sellerId: "seller_dhaka_01",
+      image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=85",
+      createdAt: Date.now(),
+    },
+    {
+      id: "prod_candle_01",
+      name: "Artisan Soy Wax Starter Bundle (1kg Golden Wax + 20 Wicks + Oils)",
+      description: "1kg 100% organic soy wax flakes, 20 braided cotton wicks, 100ml therapeutic fragrance oil blend, and 6 amber glass jars.",
+      category: "candle",
+      price: 3200,
+      stock: 30,
+      sellerId: "seller_sylhet_01",
+      image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=85",
+      createdAt: Date.now(),
+    },
+    {
+      id: "prod_soap_01",
+      name: "Botanical Soap Starter Pack (Organic Coconut & Olive Oil + Lye)",
+      description: "1L cold-pressed virgin coconut oil, 500ml olive oil, high-purity sodium hydroxide (lye), natural turmeric colorant, and silicone loaf mold.",
+      category: "soap",
+      price: 2800,
+      stock: 25,
+      sellerId: "seller_ctg_01",
+      image: "https://images.unsplash.com/photo-1607006314633-8a30364d99c4?auto=format&fit=crop&w=800&q=85",
+      createdAt: Date.now(),
+    },
+    {
+      id: "prod_mug_01",
+      name: "Sublimation Merch Kit (12 Ceramic Blanks + Heat Tape + Paper)",
+      description: "12 grade-AAA coated white ceramic mugs, 50 sheets high-transfer sublimation paper, thermal tape, and protective silicon wraps.",
+      category: "mug",
+      price: 2100,
+      stock: 40,
+      sellerId: "seller_dhaka_02",
+      image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=85",
+      createdAt: Date.now(),
+    },
+  ];
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -36,9 +83,10 @@ function MaterialsContent() {
         snap.forEach((doc) => {
           list.push({ id: doc.id, ...(doc.data() as Omit<Product, "id">) });
         });
-        setProducts(list);
+        setProducts(list.length > 0 ? list : DEFAULT_PRODUCTS);
       } catch (err) {
-        console.error("Error fetching products:", err);
+        console.error("Error fetching products, using defaults:", err);
+        setProducts(DEFAULT_PRODUCTS);
       } finally {
         setLoading(false);
       }
