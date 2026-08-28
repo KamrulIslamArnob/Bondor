@@ -52,9 +52,9 @@ export const TestimonialsSection: React.FC = () => {
           >
             <div className="space-y-3">
               {/* Star Rating */}
-              <div className="flex items-center gap-1 text-amber-400">
+              <div className="flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars rating">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-amber-400" />
+                  <Star key={i} size={14} className="fill-amber-400" aria-hidden="true" />
                 ))}
               </div>
 

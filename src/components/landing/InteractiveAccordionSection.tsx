@@ -112,8 +112,17 @@ export const InteractiveAccordionSection: React.FC = () => {
             return (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isActive}
                 onClick={() => setActiveId(item.id)}
-                className={`border rounded-2xl p-5 transition-[background-color,border-color,box-shadow] duration-200 cursor-pointer ${
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActiveId(item.id);
+                  }
+                }}
+                className={`border rounded-2xl p-5 transition-[background-color,border-color,box-shadow] duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${
                   isActive
                     ? "bg-white border-sky-300 shadow-card ring-1 ring-sky-400/30"
                     : "bg-slate-50/70 hover:bg-white border-slate-200/80 hover:border-slate-300"
@@ -152,7 +161,7 @@ export const InteractiveAccordionSection: React.FC = () => {
                     <p className="text-pretty font-normal">{item.description}</p>
                     <Link
                       href={item.actionHref}
-                      className="inline-flex items-center gap-1.5 font-bold text-sky-600 hover:text-sky-700 transition-colors"
+                      className="inline-flex items-center gap-1.5 font-bold text-sky-600 hover:text-sky-700 transition-colors focus-visible:outline-none focus-visible:underline"
                     >
                       <span>{item.actionText}</span>
                       <ArrowRight size={13} />
@@ -217,14 +226,16 @@ export const InteractiveAccordionSection: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Ask a production question..."
+                  aria-label="Simulated production question"
                   className="bg-transparent border-none outline-none text-xs text-white placeholder:text-slate-400 flex-1"
                   readOnly
                   value="How do I calculate starter batch economics?"
                 />
                 <button
                   type="button"
+                  aria-label="Submit simulated query"
                   onClick={() => setActiveId("economics")}
-                  className="w-7 h-7 rounded-full bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center shrink-0 transition-colors shadow-xs"
+                  className="w-7 h-7 rounded-full bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center shrink-0 transition-colors shadow-xs focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:outline-none"
                 >
                   <Send size={12} />
                 </button>
