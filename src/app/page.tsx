@@ -3,13 +3,17 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Hero } from "@/components/landing/Hero";
-import { SocialProofBar } from "@/components/landing/SocialProofBar";
-import { FeatureCards } from "@/components/landing/FeatureCards";
-import { InteractiveAccordionSection } from "@/components/landing/InteractiveAccordionSection";
-import { MakerStories } from "@/components/landing/MakerStories";
-import { TheNumbers } from "@/components/landing/TheNumbers";
-import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { LogoCloudSection } from "@/components/sections/LogoCloudSection";
+import { WorkflowsSection } from "@/components/sections/WorkflowsSection";
+import { DarkFeatureGridSection } from "@/components/sections/DarkFeatureGridSection";
+import { GitForManufacturingSection } from "@/components/sections/GitForManufacturingSection";
+import { SpotlightCaseStudySection } from "@/components/sections/SpotlightCaseStudySection";
+import { TeamRoleFeatureSection } from "@/components/sections/TeamRoleFeatureSection";
+import { IntegrationPillSection } from "@/components/sections/IntegrationPillSection";
+import { StepByStepFlowSection } from "@/components/sections/StepByStepFlowSection";
+import { SupportTeamSection } from "@/components/sections/SupportTeamSection";
+import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 export default function HomePage() {
@@ -31,27 +35,39 @@ export default function HomePage() {
   }
 
   return (
-    <div className="w-full space-y-4">
-      {/* 1. Scenic Hero Section with Prompt Box */}
-      <Hero initialMode="login" />
+    <div className="w-full bg-white space-y-4">
+      {/* 1. Hero Section with 5 Category Bento Cards & Reviews */}
+      <HeroSection />
 
-      {/* 2. Logo Cloud & Social Proof Bar */}
-      <SocialProofBar />
+      {/* 2. Brand & Maker Logo Cloud */}
+      <LogoCloudSection />
 
-      {/* 3. Three-Card Feature Section */}
-      <FeatureCards />
+      {/* 3. Alternating Workflow Bento Cards */}
+      <WorkflowsSection />
 
-      {/* 4. Split Interactive Accordion + Live Assistant Preview */}
-      <InteractiveAccordionSection />
+      {/* 4. High-Tech Dark Supply Network Bento */}
+      <DarkFeatureGridSection />
 
-      {/* 5. Maker Portrait Stories */}
-      <MakerStories />
+      {/* 5. The "Git" for Physical Manufacturing Section */}
+      <GitForManufacturingSection />
 
-      {/* 6. The Numbers Editorial Metrics */}
-      <TheNumbers />
+      {/* 6. Maker Spotlight Case Study */}
+      <SpotlightCaseStudySection />
 
-      {/* 7. Testimonials & Verified Reviews */}
-      <TestimonialsSection />
+      {/* 7. Workshop Team Role Tabs & Feature Previews */}
+      <TeamRoleFeatureSection />
+
+      {/* 8. Integrations & Sync Pill Bar */}
+      <IntegrationPillSection />
+
+      {/* 9. 5-Step Manufacturing Workflow */}
+      <StepByStepFlowSection />
+
+      {/* 10. Support Team & 9.8 Satisfaction Rating */}
+      <SupportTeamSection />
+
+      {/* 11. Final Call to Action Banner */}
+      <FinalCtaSection />
     </div>
   );
 }
