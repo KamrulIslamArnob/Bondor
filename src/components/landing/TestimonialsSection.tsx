@@ -1,33 +1,33 @@
 "use client";
 
 import React from "react";
-import { Star, ShieldCheck } from "lucide-react";
+import { Star, ShieldCheck, Hammer, Store } from "lucide-react";
 
 export const TestimonialsSection: React.FC = () => {
   const reviews = [
     {
       id: 1,
       name: "Mahmudul Hasan",
-      role: "T-Shirt Screenprinter, Chittagong",
-      company: "CraftWave Studio",
+      role: "Builder · Screenprinting Startup, Chittagong",
+      type: "Builder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
-      content: "Bondor completely eliminated my biggest headache: finding reliable blank tees that don't shrink after the first wash. The courses also taught me half-tone printing in one weekend.",
+      content: "Bondor solved my biggest roadblock as a new entrepreneur: where to learn screen printing and where to find quality cotton blanks without paying retail markups. The video courses made setup easy.",
     },
     {
       id: 2,
       name: "Farhana Karim",
-      role: "Candle Maker & Scent Designer, Sylhet",
-      company: "AromaHaven",
+      role: "Builder · Soy Candle Artisan, Sylhet",
+      type: "Builder",
       avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80",
-      content: "I started with zero experience. The batch calculator helped me price my scented candles profitably right away. The soy wax kit arrived within 48 hours in perfect condition.",
+      content: "Starting a candle business seemed intimidating until I ordered the starter pack. Having measured ratios of wax, fragrance, and wicks gave me the confidence to pour my first batch on day one.",
     },
     {
       id: 3,
-      name: "Arif Chowdhury",
-      role: "Handmade Soap Crafter, Dhaka",
-      company: "Botanical Bar",
+      name: "Shahadat Hossain",
+      role: "Wholesale Supplier · Raw Materials, Dhaka",
+      type: "Seller",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-      content: "The escrow checkout gives total peace of mind. Knowing my money is only released after quality inspection makes ordering raw ingredients completely stress-free.",
+      content: "As a wholesale supplier, listing material starter packs on Bondor connected us directly with hundreds of passionate micro-makers across Bangladesh. The vendor dashboard is simple to manage.",
     },
   ];
 
@@ -36,10 +36,10 @@ export const TestimonialsSection: React.FC = () => {
       {/* Centered Editorial Header */}
       <div className="text-center space-y-2 max-w-xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-serif font-extrabold text-slate-900 tracking-tight text-balance">
-          Trusted by 15,000+ makers &amp; vendors
+          Trusted by Builders &amp; Suppliers
         </h2>
         <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-          Real stories from independent Bangladeshi producers
+          Real feedback from Bangladesh's growing micro-entrepreneur community
         </p>
       </div>
 
@@ -82,9 +82,9 @@ export const TestimonialsSection: React.FC = () => {
                 </div>
               </div>
 
-              <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/80 shrink-0 flex items-center gap-1">
-                <ShieldCheck size={11} />
-                <span>Verified</span>
+              <span className="text-[10px] font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80 shrink-0 flex items-center gap-1">
+                {rev.type === "Seller" ? <Store size={11} /> : <Hammer size={11} />}
+                <span>{rev.type}</span>
               </span>
             </div>
           </div>

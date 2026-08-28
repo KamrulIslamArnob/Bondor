@@ -1,35 +1,38 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Layers, Flame, Sparkles, Box, Anchor } from "lucide-react";
+import { ShieldCheck, Layers, Flame, Sparkles, Box, Anchor, BookOpen, CreditCard } from "lucide-react";
 
 export const SocialProofBar: React.FC = () => {
-  const partners = [
-    { name: "Textile Harbor", icon: <Layers size={15} className="text-slate-700" /> },
-    { name: "Candle Studio BD", icon: <Flame size={15} className="text-slate-700" /> },
-    { name: "Soapworks Guild", icon: <Sparkles size={15} className="text-slate-700" /> },
-    { name: "PrintCraft Blanks", icon: <Box size={15} className="text-slate-700" /> },
-    { name: "Escrow Secured", icon: <ShieldCheck size={15} className="text-emerald-600" /> },
+  const pillars = [
+    { name: "Business Education", desc: "Structured Video Masterclasses", icon: <BookOpen size={15} className="text-sky-600" /> },
+    { name: "Wholesale Material Packs", desc: "Verified Raw Ingredients", icon: <Box size={15} className="text-amber-600" /> },
+    { name: "Dual-Role Architecture", desc: "Builders & Sellers", icon: <Layers size={15} className="text-slate-700" /> },
+    { name: "Batch Cost Economics", desc: "Pre-Calculated Profit Margins", icon: <Sparkles size={15} className="text-purple-600" /> },
+    { name: "Stripe Payment Gateway", desc: "100% Secure Checkout", icon: <CreditCard size={15} className="text-emerald-600" /> },
   ];
 
   return (
-    <div className="w-full py-10 border-y border-slate-200/80 bg-white/60 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center space-y-5">
+    <div className="w-full py-8 border-y border-slate-200/80 bg-white/70 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center space-y-4">
         <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-          Trusted by 500+ local makers &amp; verified suppliers across Bangladesh
+          The All-in-One Digital Harbor for Micro-Entrepreneurs in Bangladesh
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 opacity-85 hover:opacity-100 transition-opacity">
-          {partners.map((partner, idx) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {pillars.map((pillar, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-2 text-slate-700 hover:text-slate-900 transition-colors"
+              className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50/80 border border-slate-200/70 text-center hover:bg-white hover:shadow-xs transition-all"
             >
-              <div className="w-6 h-6 rounded-md bg-slate-100 flex items-center justify-center border border-slate-200/80">
-                {partner.icon}
+              <div className="w-7 h-7 rounded-lg bg-white shadow-xs border border-slate-200/80 flex items-center justify-center mb-1.5">
+                {pillar.icon}
               </div>
-              <span className="text-xs sm:text-sm font-bold tracking-tight font-serif">
-                {partner.name}
+              <span className="text-xs font-bold text-slate-900 font-serif">
+                {pillar.name}
+              </span>
+              <span className="text-[10px] text-slate-500 font-medium">
+                {pillar.desc}
               </span>
             </div>
           ))}

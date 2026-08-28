@@ -2,63 +2,63 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Layers, Flame } from "lucide-react";
+import { ArrowRight, Sparkles, Layers, Flame, Box } from "lucide-react";
 
 export const MakerStories: React.FC = () => {
   const stories = [
     {
-      id: "apparel",
-      category: "Screenprinting & Apparel",
+      id: "tshirt",
+      category: "T-Shirt Screenprinting",
       name: "Tariqul Islam",
-      role: "Founder, Dhaka Streetwear Co.",
-      story: "Scaled custom graphic tee production from 10 test shirts to 500 orders/month using Bondor's verified combed cotton blanks.",
-      tag: "500 Orders/mo",
-      color: "from-sky-900/90 via-slate-900/70 to-transparent",
-      icon: <Layers size={14} />,
+      role: "Builder · Dhaka Streetwear Co.",
+      story: "Enrolled in the screen preparation masterclass and sourced 50 cotton blanks directly from a verified supplier. Reached break-even in my second week.",
+      tag: "500 Shirts/Month",
+      color: "from-sky-950/90 via-slate-900/70 to-transparent",
+      icon: <Layers size={14} aria-hidden="true" />,
       bgImage: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "candle",
-      category: "Artisan Candle Making",
+      category: "Scented Candle Making",
       name: "Samira Rahman",
-      role: "Creator, Luminate Studio",
-      story: "Started with a ৳3,200 soy wax starter kit and mastered wick sizing through the video academy. Now stocked in 14 local lifestyle boutiques.",
+      role: "Builder · Luminate Studio Sylhet",
+      story: "Started with a ৳3,200 soy wax starter pack and mastered wick sizing through the video courses. Now stocked in 14 local lifestyle boutiques.",
       tag: "14 Boutiques",
       color: "from-amber-950/90 via-slate-900/70 to-transparent",
-      icon: <Flame size={14} />,
+      icon: <Flame size={14} aria-hidden="true" />,
       bgImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "soap",
-      category: "Organic Soap Craft",
+      category: "Handmade Soap & Cosmetics",
       name: "Zubair Ahmed",
-      role: "Maker, PureBotanic BD",
-      story: "Formulated cold-process herbal soaps with guaranteed ingredient purity. Bondor's escrow ordering eliminated supplier batch inconsistency.",
+      role: "Builder · PureBotanic BD",
+      story: "Learned cold-process saponification and ordered certified botanical oils and caustic soda in calibrated batch ratios with secure Stripe payment.",
       tag: "Zero Defect Batches",
       color: "from-emerald-950/90 via-slate-900/70 to-transparent",
-      icon: <Sparkles size={14} />,
+      icon: <Sparkles size={14} aria-hidden="true" />,
       bgImage: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
     },
   ];
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 space-y-12">
-      {/* Section Header */}
+      {/* Section Header based on User Roles & Responsibilities */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3 max-w-xl">
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-700 bg-sky-50 px-3 py-1 rounded-full border border-sky-200/80">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-600" />
-            <span>Built for creators</span>
+            <span>Empowering Micro-Entrepreneurs</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif font-extrabold text-slate-900 tracking-tight leading-tight text-balance">
-            Built for the People
+            Real Businesses Built on
             <br />
-            Wearing Every Hat
+            Bondor's Digital Harbor
           </h2>
         </div>
 
         <p className="text-sm text-slate-600 max-w-md leading-relaxed text-pretty font-normal">
-          Solopreneurs, small workshops, and creative artisans who design, formulate, produce, package, and sell on their own terms.
+          How aspiring Bangladeshi builders turn business-oriented video education and wholesale raw material packs into profitable small-scale production workshops.
         </p>
       </div>
 
@@ -111,7 +111,7 @@ export const MakerStories: React.FC = () => {
                   href={`/courses?business=${maker.id}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-300 hover:text-white transition-colors"
                 >
-                  <span>Explore this Dock</span>
+                  <span>Explore this Business Dock</span>
                   <ArrowRight size={13} />
                 </Link>
               </div>

@@ -2,33 +2,33 @@
 
 import React from "react";
 import Link from "next/link";
-import { BookOpen, Package, Calculator, ArrowUpRight, Play, CheckCircle2, ShieldCheck } from "lucide-react";
+import { BookOpen, Package, Calculator, ArrowUpRight, Play, CheckCircle2, ShieldCheck, ShoppingBag } from "lucide-react";
 
 export const FeatureCards: React.FC = () => {
   return (
     <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 space-y-12">
-      {/* Section Header */}
+      {/* Section Header based on Project Purpose */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3 max-w-xl">
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-700 bg-sky-50 px-3 py-1 rounded-full border border-sky-200/80">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-600" />
-            <span>How Bondor Works</span>
+            <span>Integrated Startup System</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif font-extrabold text-slate-900 tracking-tight leading-tight text-balance">
-            Learn the Craft,
+            Combining Business Education
             <br />
-            Order the Starter Kits
+            &amp; Wholesale Sourcing
           </h2>
         </div>
 
         <p className="text-sm text-slate-600 max-w-md leading-relaxed text-pretty font-normal">
-          Skip months of trial, error, and wasted material. Follow hands-on masterclass video courses taught by local masters, then order verified production-grade raw supply packs delivered to your workshop.
+          New entrepreneurs struggle with knowing where to learn essential craft skills and where to find trusted wholesale suppliers. Bondor solves both problems in a single unified harbor.
         </p>
       </div>
 
       {/* 3 Column Feature Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1: Video Masterclasses */}
+        {/* Card 1: Course Marketplace */}
         <Link
           href="/courses"
           className="group bg-white border border-slate-200/80 rounded-2xl overflow-hidden p-5 flex flex-col justify-between gap-5 transition-[box-shadow,border-color,transform] duration-200 shadow-xs hover:shadow-card hover:border-sky-300 hover:-translate-y-1"
@@ -41,26 +41,26 @@ export const FeatureCards: React.FC = () => {
             <div className="absolute bottom-2.5 left-3 right-3 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-200/60 flex items-center justify-between text-[11px] font-medium text-slate-700">
               <span className="flex items-center gap-1">
                 <BookOpen size={12} className="text-sky-600" />
-                <span>4 Docks · 16 Masterclasses</span>
+                <span>Video Masterclasses</span>
               </span>
-              <span className="text-emerald-600 font-bold">1080p HD</span>
+              <span className="text-emerald-600 font-bold">Bangla Guides</span>
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <h3 className="font-bold text-slate-900 text-base group-hover:text-sky-600 transition-colors flex items-center gap-1.5">
-                01. Video Masterclasses
+                01. Business Education
               </h3>
               <ArrowUpRight size={15} className="text-slate-400 group-hover:text-sky-600 transition-colors" />
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed text-pretty">
-              Follow step-by-step modular lessons covering screen preparation, ink mixing, soy wax pouring, and cold-process curing.
+            <p className="text-xs text-slate-500 leading-relaxed text-pretty font-normal">
+              Follow practical, step-by-step modular courses taught by experienced creators covering printing, candle pouring, soap chemistry, and product packaging.
             </p>
           </div>
         </Link>
 
-        {/* Card 2: Curated Raw Material Packs */}
+        {/* Card 2: Wholesale Material Packs */}
         <Link
           href="/materials"
           className="group bg-white border border-slate-200/80 rounded-2xl overflow-hidden p-5 flex flex-col justify-between gap-5 transition-[box-shadow,border-color,transform] duration-200 shadow-xs hover:shadow-card hover:border-sky-300 hover:-translate-y-1"
@@ -73,26 +73,26 @@ export const FeatureCards: React.FC = () => {
             <div className="absolute bottom-2.5 left-3 right-3 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-200/60 flex items-center justify-between text-[11px] font-medium text-slate-700">
               <span className="flex items-center gap-1">
                 <CheckCircle2 size={12} className="text-emerald-600" />
-                <span>Certified Raw Ingredients</span>
+                <span>Verified Suppliers</span>
               </span>
-              <span className="text-slate-900 font-bold tabular-nums">11 Starter Kits</span>
+              <span className="text-slate-900 font-bold tabular-nums">Wholesale Packs</span>
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <h3 className="font-bold text-slate-900 text-base group-hover:text-sky-600 transition-colors flex items-center gap-1.5">
-                02. Curated Material Kits
+                02. Wholesale Starter Packs
               </h3>
               <ArrowUpRight size={15} className="text-slate-400 group-hover:text-sky-600 transition-colors" />
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed text-pretty">
-              Get tested starter bundles containing exact ratios of waxes, blank tees, botanical oils, and screen mesh delivered from local vendors.
+            <p className="text-xs text-slate-500 leading-relaxed text-pretty font-normal">
+              Order tested small-batch material starter packs directly from local wholesale vendors with certified ingredients and batch pricing.
             </p>
           </div>
         </Link>
 
-        {/* Card 3: Batch Economics & Escrow */}
+        {/* Card 3: Batch Economics & Checkout */}
         <Link
           href="/builder-dashboard"
           className="group bg-white border border-slate-200/80 rounded-2xl overflow-hidden p-5 flex flex-col justify-between gap-5 transition-[box-shadow,border-color,transform] duration-200 shadow-xs hover:shadow-card hover:border-sky-300 hover:-translate-y-1"
@@ -105,21 +105,21 @@ export const FeatureCards: React.FC = () => {
             <div className="absolute bottom-2.5 left-3 right-3 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-200/60 flex items-center justify-between text-[11px] font-medium text-slate-700">
               <span className="flex items-center gap-1">
                 <ShieldCheck size={12} className="text-emerald-600" />
-                <span>100% Escrow Protected</span>
+                <span>Stripe Gateway</span>
               </span>
-              <span className="text-sky-700 font-bold">Auto Pricing</span>
+              <span className="text-sky-700 font-bold">Secure Cart</span>
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <h3 className="font-bold text-slate-900 text-base group-hover:text-sky-600 transition-colors flex items-center gap-1.5">
-                03. Unit Batch Economics
+                03. Unit Economics &amp; Checkout
               </h3>
               <ArrowUpRight size={15} className="text-slate-400 group-hover:text-sky-600 transition-colors" />
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed text-pretty">
-              Calculate cost-per-unit, profit margins, and packaging overhead before placing batch orders with secure checkout.
+            <p className="text-xs text-slate-500 leading-relaxed text-pretty font-normal">
+              Calculate cost-per-unit, raw material ratios, and estimated profit margins before placing your order through our Stripe payment gateway.
             </p>
           </div>
         </Link>

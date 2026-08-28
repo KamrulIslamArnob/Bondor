@@ -5,24 +5,24 @@ import React from "react";
 export const TheNumbers: React.FC = () => {
   const metrics = [
     {
-      label: "Course Completion & Skill Mastery Rate",
-      value: "92%",
-      description: "Students complete all modules with hands-on output",
+      label: "Integrated Education & Sourcing Architecture",
+      value: "2-in-1",
+      description: "Business courses and wholesale material packs united in one system",
     },
     {
-      label: "Average Starter Kit Savings vs Open Market Retail",
+      label: "Average Starter Pack Cost Savings vs Retail Middlemen",
       value: "4x",
-      description: "Direct-from-supplier pricing with verified ingredient purity",
+      description: "Direct wholesale pricing from verified local Bangladeshi suppliers",
     },
     {
-      label: "Makers Reaching First Batch Break-Even in 30 Days",
+      label: "Builders Reaching First Batch Break-Even in 30 Days",
       value: "70%",
-      description: "Fast payback with our pre-calculated batch profit margins",
+      description: "Fast payback with pre-calculated batch profit margins & video guides",
     },
     {
-      label: "Escrow Protection & Supplier Quality Satisfaction",
-      value: "98%",
-      description: "Over 1,200 verified orders completed with zero escrow disputes",
+      label: "Stripe Online Payment Security & Instant Confirmation",
+      value: "100%",
+      description: "Encrypted credit/debit card processing with zero transaction friction",
     },
   ];
 
@@ -34,7 +34,7 @@ export const TheNumbers: React.FC = () => {
           The Numbers
         </h2>
         <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-          Proven Impact Across Bangladesh's Maker Economy
+          Empowering Micro-Entrepreneurs &amp; Supporting Economic Growth
         </p>
       </div>
 
